@@ -2,44 +2,38 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tb_laypeliputans', {
+    await queryInterface.createTable('tb_arsipdesains', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_kegiatan: {
+      id_account: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'tb_kegiatan',
+          model: 'tb_account',
           key: 'id'
         }
       },
-      judul_berita: {
+      judul_desain: {
         type: Sequelize.STRING
       },
       kategori: {
         type: Sequelize.STRING
       },
-      leaflet_kegiatan: {
-        type: Sequelize.STRING
+      keterangan: {
+        type: Sequelize.TEXT
+      },
+      deadline: {
+        type: Sequelize.DATE
       },
       status: {
         type: Sequelize.STRING
       },
-      disposisi: {
+      lampiran_file: {
         type: Sequelize.STRING
-      },
-      jurnalis: {
-        type: Sequelize.STRING
-      },
-      prarilis: {
-        type: Sequelize.TEXT
-      },
-      rilis: {
-        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -52,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tb_laypeliputans');
+    await queryInterface.dropTable('tb_arsipdesains');
   }
 };

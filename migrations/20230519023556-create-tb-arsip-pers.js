@@ -2,44 +2,56 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tb_laypeliputans', {
+    await queryInterface.createTable('tb_arsip_pers', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_kegiatan: {
+      id_peliputan: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'tb_kegiatan',
+          model: 'tb_laypeliputan',
           key: 'id'
         }
       },
-      judul_berita: {
+      no_rilis: {
         type: Sequelize.STRING
       },
-      kategori: {
+      tgl_upload: {
+        type: Sequelize.DATE
+      },
+      waktu_upload: {
+        type: Sequelize.TIME
+      },
+      admin: {
         type: Sequelize.STRING
       },
-      leaflet_kegiatan: {
+      link_berita: {
+        type: Sequelize.STRING
+      },
+      penerjemah: {
+        type: Sequelize.STRING
+      },
+      judul_terjemahan: {
+        type: Sequelize.STRING
+      },
+      tgl_upload_terj: {
+        type: Sequelize.DATE
+      },
+      waktu_upload_terj: {
+        type: Sequelize.TIME
+      },
+      admin_terj: {
+        type: Sequelize.STRING
+      },
+      link_terj: {
         type: Sequelize.STRING
       },
       status: {
         type: Sequelize.STRING
-      },
-      disposisi: {
-        type: Sequelize.STRING
-      },
-      jurnalis: {
-        type: Sequelize.STRING
-      },
-      prarilis: {
-        type: Sequelize.TEXT
-      },
-      rilis: {
-        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
@@ -52,6 +64,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tb_laypeliputans');
+    await queryInterface.dropTable('tb_arsip_pers');
   }
 };

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class tb_laypeliputan extends Model {
+  class tb_laypubagenda extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,19 +13,16 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  tb_laypeliputan.init({
+  tb_laypubagenda.init({
     id_kegiatan: DataTypes.INTEGER,
-    judul_berita: DataTypes.STRING,
-    kategori: DataTypes.STRING,
     leaflet_kegiatan: DataTypes.STRING,
+    caption: DataTypes.TEXT,
     status: DataTypes.STRING,
     disposisi: DataTypes.STRING,
-    jurnalis: DataTypes.STRING,
-    prarilis: DataTypes.TEXT,
-    rilis: DataTypes.TEXT
+    luaran_layanan: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'tb_laypeliputan',
+    modelName: 'tb_laypubagenda',
   });
-  return tb_laypeliputan;
+  return tb_laypubagenda;
 };
