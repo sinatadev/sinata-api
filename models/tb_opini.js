@@ -21,11 +21,11 @@ module.exports = (sequelize, DataTypes) => {
     bahan_publikasi: DataTypes.STRING,
     status: DataTypes.STRING,
     disposisi: DataTypes.STRING,
-    tgl_waktu_upload: DataTypes.DATEONLY,
+    tgl_waktu_upload: DataTypes.DATE,
     admin: DataTypes.STRING,
     link_berita: DataTypes.STRING,
     penerjemah: DataTypes.STRING,
-    tgl_waktu_upload_terj: DataTypes.DATEONLY,
+    tgl_waktu_upload_terj: DataTypes.DATE,
     admin_terj: DataTypes.STRING,
     link_terj: DataTypes.STRING
   }, {

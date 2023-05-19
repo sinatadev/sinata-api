@@ -36,7 +36,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       tgl_waktu_upload: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
       },
       admin: {
         type: Sequelize.STRING
@@ -48,7 +48,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       tgl_waktu_upload_terj: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.DATE
       },
       admin_terj: {
         type: Sequelize.STRING
