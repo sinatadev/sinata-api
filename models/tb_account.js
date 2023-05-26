@@ -14,16 +14,42 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_account.init({
-    username: DataTypes.STRING,
-    email: DataTypes.STRING,
-    name: DataTypes.STRING,
-    password: DataTypes.STRING,
-    no_identitas: DataTypes.STRING,
-    unit: DataTypes.STRING,
-    token: DataTypes.STRING,
-    role: DataTypes.STRING,
-    kontak: DataTypes.STRING,
-    img_profil: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    username: {
+      type: DataTypes.STRING
+    },
+    email: {
+      type: DataTypes.STRING
+    },
+    name: {
+      type: DataTypes.STRING
+    },
+    password: {
+      type: DataTypes.STRING
+    },
+    no_identitas: {
+      type: DataTypes.STRING
+    },
+    unit: {
+      type: DataTypes.STRING
+    },
+    token: {
+      type: DataTypes.STRING
+    },
+    role: {
+      type: DataTypes.STRING
+    },
+    kontak: {
+      type: DataTypes.STRING
+    },
+    img_profil: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'tb_account',

@@ -14,15 +14,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_kegiatan.init({
-    id_account: DataTypes.INTEGER,
-    judul_kegiatan: DataTypes.STRING,
-    des_kegiatan: DataTypes.TEXT,
-    sifat_kegiatan: DataTypes.STRING,
-    tgl_kegiatan: DataTypes.DATE,
-    waktu_kegiatan: DataTypes.TIME,
-    tempat_kegiatan: DataTypes.STRING,
-    surat_permohonan: DataTypes.STRING,
-    sik: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_account: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_account',
+        key: 'id'
+      }
+    },
+    judul_kegiatan: {
+      type: DataTypes.STRING
+    },
+    des_kegiatan: {
+      type: DataTypes.TEXT
+    },
+    sifat_kegiatan: {
+      type: DataTypes.STRING
+    },
+    tgl_kegiatan: {
+      type: DataTypes.DATE
+    },
+    waktu_kegiatan: {
+      type: DataTypes.TIME
+    },
+    tempat_kegiatan: {
+      type: DataTypes.STRING
+    },
+    surat_permohonan: {
+      type: DataTypes.STRING
+    },
+    sik: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'tb_kegiatan',

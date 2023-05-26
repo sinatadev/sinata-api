@@ -14,11 +14,32 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_filedoc.init({
-    id_file: DataTypes.INTEGER,
-    nama_file: DataTypes.STRING,
-    tipe_file: DataTypes.STRING,
-    size_file: DataTypes.INTEGER,
-    data_file: DataTypes.TEXT
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_file: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_dokumentasi',
+        key: 'id'
+      }
+    },
+    nama_file: {
+      type: DataTypes.STRING
+    },
+    tipe_file: {
+      type: DataTypes.STRING
+    },
+    size_file: {
+      type: DataTypes.INTEGER
+    },
+    data_file: {
+      type: DataTypes.TEXT
+    }
   }, {
     sequelize,
     modelName: 'tb_filedoc',

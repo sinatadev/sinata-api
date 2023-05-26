@@ -14,19 +14,56 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_arsip_pers.init({
-    id_peliputan: DataTypes.INTEGER,
-    no_rilis: DataTypes.STRING,
-    tgl_upload: DataTypes.DATE,
-    waktu_upload: DataTypes.TIME,
-    admin: DataTypes.STRING,
-    link_berita: DataTypes.STRING,
-    penerjemah: DataTypes.STRING,
-    judul_terjemahan: DataTypes.STRING,
-    tgl_upload_terj: DataTypes.DATE,
-    waktu_upload_terj: DataTypes.TIME,
-    admin_terj: DataTypes.STRING,
-    link_terj: DataTypes.STRING,
-    status: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_peliputan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_laypeliputan',
+        key: 'id'
+      }
+    },
+    no_rilis: {
+      type: DataTypes.STRING
+    },
+    tgl_upload: {
+      type: DataTypes.DATE
+    },
+    waktu_upload: {
+      type: DataTypes.TIME
+    },
+    admin: {
+      type: DataTypes.STRING
+    },
+    link_berita: {
+      type: DataTypes.STRING
+    },
+    penerjemah: {
+      type: DataTypes.STRING
+    },
+    judul_terjemahan: {
+      type: DataTypes.STRING
+    },
+    tgl_upload_terj: {
+      type: DataTypes.DATE
+    },
+    waktu_upload_terj: {
+      type: DataTypes.TIME
+    },
+    admin_terj: {
+      type: DataTypes.STRING
+    },
+    link_terj: {
+      type: DataTypes.STRING
+    },
+    status: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'tb_arsip_pers',

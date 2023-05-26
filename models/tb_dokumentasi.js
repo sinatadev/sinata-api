@@ -14,9 +14,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_dokumentasi.init({
-    id_kegiatan: DataTypes.INTEGER,
-    keterangan: DataTypes.TEXT,
-    fotografer: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_kegiatan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_kegiatan',
+        key: 'id'
+      }
+    },
+    keterangan: {
+      type: DataTypes.TEXT
+    },
+    fotografer: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'tb_dokumentasi',

@@ -14,13 +14,38 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_layvideotron.init({
-    id_kegiatan: DataTypes.INTEGER,
-    bahan_publikasi: DataTypes.STRING,
-    tgl_awal: DataTypes.DATE,
-    tgl_akhir: DataTypes.DATE,
-    status: DataTypes.STRING,
-    disposisi: DataTypes.STRING,
-    luaran_layanan: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_kegiatan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_kegiatan',
+        key: 'id'
+      }
+    },
+    bahan_publikasi: {
+      type: DataTypes.STRING
+    },
+    tgl_awal: {
+      type: DataTypes.DATE
+    },
+    tgl_akhir: {
+      type: DataTypes.DATE
+    },
+    status: {
+      type: DataTypes.STRING
+    },
+    disposisi: {
+      type: DataTypes.STRING
+    },
+    luaran_layanan: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'tb_layvideotron',

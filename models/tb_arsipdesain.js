@@ -14,13 +14,38 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_arsipdesain.init({
-    id_account: DataTypes.INTEGER,
-    judul_desain: DataTypes.STRING,
-    kategori: DataTypes.STRING,
-    keterangan: DataTypes.TEXT,
-    deadline: DataTypes.DATE,
-    status: DataTypes.STRING,
-    lampiran_file: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_account: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_account',
+        key: 'id'
+      }
+    },
+    judul_desain: {
+      type: DataTypes.STRING
+    },
+    kategori: {
+      type: DataTypes.STRING
+    },
+    keterangan: {
+      type: DataTypes.TEXT
+    },
+    deadline: {
+      type: DataTypes.DATE
+    },
+    status: {
+      type: DataTypes.STRING
+    },
+    lampiran_file: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'tb_arsipdesain',

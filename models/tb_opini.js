@@ -14,20 +14,59 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_opini.init({
-    id_account: DataTypes.INTEGER,
-    judul_pembahasan: DataTypes.STRING,
-    surat_permohonan: DataTypes.STRING,
-    foto_penulis: DataTypes.STRING,
-    bahan_publikasi: DataTypes.STRING,
-    status: DataTypes.STRING,
-    disposisi: DataTypes.STRING,
-    tgl_waktu_upload: DataTypes.DATE,
-    admin: DataTypes.STRING,
-    link_berita: DataTypes.STRING,
-    penerjemah: DataTypes.STRING,
-    tgl_waktu_upload_terj: DataTypes.DATE,
-    admin_terj: DataTypes.STRING,
-    link_terj: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_account: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_account',
+        key: 'id'
+      }
+    },
+    judul_pembahasan: {
+      type: DataTypes.STRING
+    },
+    surat_permohonan: {
+      type: DataTypes.STRING
+    },
+    foto_penulis: {
+      type: DataTypes.STRING
+    },
+    bahan_publikasi: {
+      type: DataTypes.STRING
+    },
+    status: {
+      type: DataTypes.STRING
+    },
+    disposisi: {
+      type: DataTypes.STRING
+    },
+    tgl_waktu_upload: {
+      type: DataTypes.DATE
+    },
+    admin: {
+      type: DataTypes.STRING
+    },
+    link_berita: {
+      type: DataTypes.STRING
+    },
+    penerjemah: {
+      type: DataTypes.STRING
+    },
+    tgl_waktu_upload_terj: {
+      type: DataTypes.DATE
+    },
+    admin_terj: {
+      type: DataTypes.STRING
+    },
+    link_terj: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'tb_opini',

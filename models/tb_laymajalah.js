@@ -14,11 +14,32 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_laymajalah.init({
-    id_kegiatan: DataTypes.INTEGER,
-    bahan_publikasi: DataTypes.STRING,
-    status: DataTypes.STRING,
-    disposisi: DataTypes.STRING,
-    luaran_layanan: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_kegiatan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_kegiatan',
+        key: 'id'
+      }
+    },
+    bahan_publikasi: {
+      type: DataTypes.STRING
+    },
+    status: {
+      type: DataTypes.STRING
+    },
+    disposisi: {
+      type: DataTypes.STRING
+    },
+    luaran_layanan: {
+      type: DataTypes.STRING
+    },
   }, {
     sequelize,
     modelName: 'tb_laymajalah',

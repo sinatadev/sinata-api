@@ -14,13 +14,38 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_laypeminformasi.init({
-    id_account: DataTypes.INTEGER,
-    judul_permohonan: DataTypes.STRING,
-    surat_permohonan: DataTypes.STRING,
-    bahan_publikasi: DataTypes.STRING,
-    status: DataTypes.STRING,
-    disposisi: DataTypes.STRING,
-    luaran_layanan: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_account: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_account',
+        key: 'id'
+      }
+    },
+    judul_permohonan: {
+      type: DataTypes.STRING
+    },
+    surat_permohonan: {
+      type: DataTypes.STRING
+    },
+    bahan_publikasi: {
+      type: DataTypes.STRING
+    },
+    status: {
+      type: DataTypes.STRING
+    },
+    disposisi: {
+      type: DataTypes.STRING
+    },
+    luaran_layanan: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'tb_laypeminformasi',

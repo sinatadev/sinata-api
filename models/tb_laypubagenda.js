@@ -14,12 +14,35 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   tb_laypubagenda.init({
-    id_kegiatan: DataTypes.INTEGER,
-    leaflet_kegiatan: DataTypes.STRING,
-    caption: DataTypes.TEXT,
-    status: DataTypes.STRING,
-    disposisi: DataTypes.STRING,
-    luaran_layanan: DataTypes.STRING
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
+    id_kegiatan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_kegiatan',
+        key: 'id'
+      }
+    },
+    leaflet_kegiatan: {
+      type: DataTypes.STRING
+    },
+    caption: {
+      type: DataTypes.TEXT
+    },
+    status: {
+      type: DataTypes.STRING
+    },
+    disposisi: {
+      type: DataTypes.STRING
+    },
+    luaran_layanan: {
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'tb_laypubagenda',
