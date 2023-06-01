@@ -31,7 +31,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       role: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('User', 'Super Admin', 'Admin Role 1', 'Admin Role 2', 'Admin Role 3', 'Admin Role 4', 'Admin Role 5', 'Admin Role 6', 'Admin Role 7', 'Admin Role 8', 'Admin Role 9'),
+        defaultValue: 'User',
       },
       kontak: {
         type: Sequelize.STRING

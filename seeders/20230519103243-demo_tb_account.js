@@ -13,7 +13,7 @@ module.exports = {
         username: 'superadmin',
         email: 'superadmin@admin.com',
         name: 'Super Admin',
-        password: 'password',
+        password: '$2a$16$3Zt9NiiHUWjl8xjNwTpjOuCTpBonbhXg.jGlqgQTYr5NWfvssy3je', // => password
         no_identitas: '33311237677512',
         unit: 'UPT Humas dan Media',
         token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1cGVyYWRtaW4iLCJlbWFpbCI6InN1cGVyYWRtaW5AYWRtaW4uY29tIiwibmFtZSI6IlN1cGVyIEFkbWluIiwicm9sZSI6IlN1cGVyIEFkbWluIn0.CjtOx89cXESLEchBS6k8IYgfG_w5Vd991-fkj9q5DA8',
@@ -28,7 +28,7 @@ module.exports = {
         username: 'usersinata11',
         email: 'usersinata11@user.com',
         name: 'User Sinata 11',
-        password: 'password',
+        password: '$2a$16$3Zt9NiiHUWjl8xjNwTpjOuCTpBonbhXg.jGlqgQTYr5NWfvssy3je', // => password
         no_identitas: 'M3119016',
         unit: 'Sekolah Vokasi UNS',
         token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJzaW5hdGExMSIsImVtYWlsIjoidXNlcnNpbmF0YTExQHVzZXIuY29tIiwibmFtZSI6IlVzZXIgU2luYXRhIDExIiwicm9sZSI6IlVzZXIifQ.WigEeb_srCCpx3uROdc4OqeZGWJnma58PpcRA2vwa6s',
