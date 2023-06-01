@@ -2,10 +2,16 @@ require('dotenv').config()
 
 const express = require('express')
 const sequelize = require('./config/connection')
-const tb_account = require('./models/tb_account')
+// const tb_account = require('./models/tb_account')
+
+const authRouter = require('./routes/auth.route')
 
 const app = express()
 const port = process.env.PORT || 3030
+const URL = '/api/v1'
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
 
 app.get('/', async (req, res) => {
     try {
@@ -16,14 +22,7 @@ app.get('/', async (req, res) => {
     }
 })
 
-app.get('/accounts', async (req, res) => {
-    try {
-        const users = await tb_account.findAll()
-        res.status(200).json({ data: users}) 
-    } catch (error) {
-        res.status(500).json('Internal Server Error : ' + error.message)
-    }
-})
+app.use(`${URL}/auth`, authRouter)
 
 app.listen(port, () => {
     console.log(`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`)
