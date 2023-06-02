@@ -34,8 +34,8 @@ tb_laypubagenda.init({
     type: DataTypes.TEXT
   },
   status: {
-    type: DataTypes.STRING
-  },
+    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
+    defaultValue: 'Pending',  },
   disposisi: {
     type: DataTypes.STRING
   },
@@ -45,7 +45,7 @@ tb_laypubagenda.init({
 }, {
   sequelize,
   modelName: 'tb_laypubagenda',
-  freezeTableName
+  freezeTableName: true
 });
 
 module.exports = tb_laypubagenda
