@@ -5,6 +5,8 @@ const sequelize = require('./config/connection')
 // const tb_account = require('./models/tb_account')
 
 const authRouter = require('./routes/auth.route')
+const landingPageRouter = require('./routes/publikasiAgenda.route')
+const { isLoginUser } = require('./middlewares/auth.middleware')
 
 const app = express()
 const port = process.env.PORT || 3030
@@ -23,6 +25,9 @@ app.get('/', async (req, res) => {
 })
 
 app.use(`${URL}/auth`, authRouter)
+app.use(`${URL}/publikasi-agenda`, landingPageRouter)
+
+app.get(`${URL}/checkLoginUser`, isLoginUser)
 
 app.listen(port, () => {
     console.log(`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`)

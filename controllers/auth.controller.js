@@ -67,7 +67,7 @@ module.exports = {
                                 role: user.role,
                                 img_profil: user.img_profil
                             }
-                        }, jwtKey)
+                        }, jwtKey, { expiresIn: '24h' })
                         
                         res.status(200).json({
                             message: 'Berhasil login',
