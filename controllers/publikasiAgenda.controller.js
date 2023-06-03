@@ -18,11 +18,16 @@ module.exports = {
             })
         }
     },
-    // addAgenda: async(req, res) => {
-    //     try {
-    //         // const 
-    //     } catch (error) {
+    addAgenda: async(req, res) => {
+        try {
+            const user = req.user  // diambil dari middleware auth
+
+            res.json({ user })
             
-    //     }
-    // }
+        } catch (error) {
+            res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            })
+        }
+    }
 }
