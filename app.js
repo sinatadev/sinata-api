@@ -5,7 +5,8 @@ const sequelize = require('./config/connection')
 // const tb_account = require('./models/tb_account')
 
 const authRouter = require('./routes/auth.route')
-const landingPageRouter = require('./routes/publikasiAgenda.route')
+const accountsRouter = require('./routes/accounts.route')
+const publikasiAgenda = require('./routes/publikasiAgenda.route')
 const { isLoginUser } = require('./middlewares/auth.middleware')
 
 const app = express()
@@ -25,7 +26,8 @@ app.get('/', async (req, res) => {
 })
 
 app.use(`${URL}/auth`, authRouter)
-app.use(`${URL}/publikasi-agenda`, landingPageRouter)
+app.use(`${URL}/users`, accountsRouter)
+app.use(`${URL}/publikasi-agenda`, publikasiAgenda)
 
 app.get(`${URL}/checkLoginUser`, isLoginUser)
 
