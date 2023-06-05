@@ -74,7 +74,7 @@ module.exports = {
                     await user.save()
                     delete user.dataValues.password
 
-                    res.status(201).json({
+                    res.status(200).json({
                         message: `Akun ${user.username} berhasil diperbarui`,
                         data: user
                     })
@@ -95,7 +95,7 @@ module.exports = {
                         await user.save()
                         delete user.dataValues.password
 
-                        res.status(201).json({
+                        res.status(200).json({
                             message: `Akun ${user.username} berhasil diperbarui`,
                             data: user
                         })
