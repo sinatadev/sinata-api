@@ -1,20 +1,50 @@
 const Accounts = require('../models/tb_account')
 const { hashPassword } = require('../utils/password.util')
 const { Op } = require('sequelize')
+const multer = require('multer')
+const { v4: uuidv4 } = require('uuid')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/')
+    },
+    filename: function (req, file, cb) {
+        let originalExt = file.originalname.split('.')[file.originalname.split('.').length - 1]
+        cb(null, uuidv4() + '-' + Date.now() + '-' + req.user.username + '.' + originalExt)
+    }
+})
+
+const upload = multer({ storage: storage })
 
 module.exports = {
     viewUsers: async (req, res) => {
+        const page = req.query.page || 1
+        const limit = parseInt(req.query.limit) || 5
+        const offset = (page - 1) * limit
         try {
-            const limit = parseInt(req.query.limit) || 5
-            const users = await Accounts.findAll({ limit: limit })
+            const totalRow = await Accounts.count()
+            const totalPage = Math.ceil(totalRow / limit)
+
+            const users = await Accounts.findAll({ 
+                offset: offset,
+                limit: limit,
+                order: [
+                    ['createdAt', 'DESC']
+                ]
+            })
 
             res.status(200).json({
-                message: `Berhasil menampilkan ${limit} pengguna terdaftar.`,
+                message: `Berhasil menampilkan ${users.length} pengguna terdaftar.`,
+                page,
+                totalPage,
+                totalRow,
+                rowsPerPage: limit,
                 data: users
             })
         } catch (error) {
             res.status(500).json({
-                message: error.message || 'Internal Server Error'
+                message: error.message || 'Internal Server Error',
+                error: error.message
             })
         }
     },
@@ -113,26 +143,48 @@ module.exports = {
         }
     },
     deleteUser: async(req, res) => {
+        const { id } = req.params
         try {
-            const { id } = req.params
-            
             const user = await Accounts.findByPk(id)
 
-            if(user) {
-                await user.destroy()
-
-                res.status(200).json({
-                    message: `Akun ${user.username} telah berhasil dihapus.`
-                })
-            } else {
+            if(!user) {
                 res.status(404).json({
                     message: 'Akun tidak ditemukan.'
                 })
             }
+
+            await user.destroy()
+
+            res.status(200).json({
+                message: `Akun ${user.username} telah berhasil dihapus.`
+            })
         } catch (error) {
             res.status(500).json({
                 message: error.message || 'Internal Server Error'
             })
         }
-    }
+    },
+    changeAvatar: async(req, res) => {
+        const { id } = req.params
+        try {
+            const user = await Accounts.findByPk(id)
+            if(!user) {
+                res.status(404).json({
+                    message: 'Akun tidak ditemukan.'
+                })
+            }
+            user.img_profil = req.file.filename
+            await user.save()
+
+            res.status(200).json({
+                message: `Berhasil mengubah avatar profil '${user.username}'.`
+            })
+
+        } catch (error) {
+            res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            })
+        }
+    }, 
+    upload
 }

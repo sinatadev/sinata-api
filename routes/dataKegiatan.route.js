@@ -7,8 +7,8 @@ const { viewDataKegiatan, addDataKegiatan, editDataKegiatan, deleteDataKegiatan 
 // admins
 router.get('/lihat', isLogin, viewDataKegiatan)
 router.post('/tambah', isLogin, addDataKegiatan)
-router.put('/edit/:id', isLogin, editDataKegiatan)
-router.delete('/delete/:id', isLogin, deleteDataKegiatan)
+router.put('/:id/edit', isLogin, editDataKegiatan)
+router.delete('/:id/delete', isLogin, deleteDataKegiatan)
 
 // users
 
