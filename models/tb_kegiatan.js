@@ -1,6 +1,7 @@
 'use strict';
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');
+const tb_account = require('./tb_account');
 
 class tb_kegiatan extends Model {
   /**
@@ -23,7 +24,7 @@ tb_kegiatan.init({
     type: DataTypes.UUID,
     allowNull: false,
     references: {
-      model: 'tb_account',
+      model: tb_account,
       key: 'id'
     }
   },
@@ -56,5 +57,8 @@ tb_kegiatan.init({
   modelName: 'tb_kegiatan',
   freezeTableName: true
 })
+
+tb_kegiatan.belongsTo(tb_account, { foreignKey: 'id_account' })
+tb_account.hasMany(tb_kegiatan, { foreignKey: 'id_account' })
 
 module.exports = tb_kegiatan

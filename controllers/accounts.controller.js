@@ -9,7 +9,7 @@ module.exports = {
             const users = await Accounts.findAll({ limit: limit })
 
             res.status(200).json({
-                message: `Berhasil menampilkan ${limit} pengguna terdaftar`,
+                message: `Berhasil menampilkan ${limit} pengguna terdaftar.`,
                 data: users
             })
         } catch (error) {
