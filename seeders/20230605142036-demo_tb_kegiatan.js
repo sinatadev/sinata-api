@@ -2,13 +2,12 @@
 
 /** @type {import('sequelize-cli').Migration} */
 
-const { v4: uuidv4 } = require('uuid')
 const now = new Date()
 
 async function generateKegiatanData() {
   const kegiatans = [
     {
-      id: uuidv4(),
+      id: '3dd49c97-8714-44e0-a2fe-45b233f623f5',
       id_account: '326d958b-c313-441a-af4f-b2932e2b52ed',
       judul_kegiatan: 'Seminar Nasional Bahas Pendidikan Kewarganegaraan untuk Penguatan Karakter Bangsa',
       des_kegiatan: 'Seminar Nasional Pendidikan Kewarganegaraan UNS',

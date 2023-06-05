@@ -3,17 +3,29 @@ const Kegiatans = require('../models/tb_kegiatan')
 
 module.exports = {
     viewDataKegiatan: async(req, res) => {
+        const page = req.query.page || 1
+        const limit = parseInt(req.query.limit) || 5
+        const offset = (page - 1) * limit
         try {
-            const limit = parseInt(req.query.limit) || 5
+            const totalRow = await Accounts.count()
+            const totalPage = Math.ceil(totalRow / limit)
             const kegiatan = await Kegiatans.findAll({
                 include: {
                     model: Accounts,
                     required: true
                 },
-                limit: limit
+                limit: limit,
+                offset: offset,
+                order: [
+                    ['createdAt', 'DESC']
+                ]
             })
             res.status(200).json({
-                message: `Berhasil menampilkan ${limit} data kegiatan tersimpan.`,
+                message: `Berhasil menampilkan ${kegiatan.length} data kegiatan tersimpan.`,
+                page,
+                totalPage,
+                totalRow,
+                rowsPerPage: limit,
                 data: kegiatan
             })
         } catch (error) {
