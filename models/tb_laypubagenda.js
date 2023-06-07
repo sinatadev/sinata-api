@@ -36,7 +36,8 @@ tb_laypubagenda.init({
   },
   status: {
     type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
-    defaultValue: 'Pending',  },
+    defaultValue: 'Pending',  
+  },
   disposisi: {
     type: DataTypes.STRING
   },

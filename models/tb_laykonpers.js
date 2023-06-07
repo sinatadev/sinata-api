@@ -1,6 +1,7 @@
 'use strict';
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');
+const tb_account = require('./tb_account');
 
 class tb_laykonpers extends Model {
   /**
@@ -46,7 +47,8 @@ tb_laykonpers.init({
     type: DataTypes.STRING
   },
   status: {
-    type: DataTypes.STRING
+    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
+    defaultValue: 'Pending',  
   },
   disposisi: {
     type: DataTypes.STRING
@@ -56,5 +58,8 @@ tb_laykonpers.init({
   modelName: 'tb_laykonpers',
   freezeTableName: true
 });
+
+tb_laykonpers.belongsTo(tb_account, { foreignKey: 'id_account' })
+tb_account.hasMany(tb_laykonpers, { foreignKey: 'id_account' })
 
 module.exports = tb_laykonpers

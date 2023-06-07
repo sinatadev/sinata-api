@@ -30,7 +30,8 @@ module.exports = {
         type: Sequelize.DATE
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
+        defaultValue: 'Pending',    
       },
       lampiran_file: {
         type: Sequelize.STRING
