@@ -8,6 +8,8 @@ const authRouter = require('./routes/auth.route')
 const accountsRouter = require('./routes/accounts.route')
 const dataKegiatanRouter = require('./routes/dataKegiatan.route')
 const publikasiAgendaRouter = require('./routes/publikasiAgenda.route')
+const konpersRouter = require('./routes/konpers.route')
+
 const { isLoginUser } = require('./middlewares/auth.middleware')
 
 const app = express()
@@ -30,6 +32,7 @@ app.use(`${URL}/auth`, authRouter)
 app.use(`${URL}/users`, accountsRouter)
 app.use(`${URL}/data-kegiatan`, dataKegiatanRouter)
 app.use(`${URL}/publikasi-agenda`, publikasiAgendaRouter)
+app.use(`${URL}/konpers`, konpersRouter)
 
 app.get(`${URL}/checkLoginUser`, isLoginUser)
 
