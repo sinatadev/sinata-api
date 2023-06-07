@@ -37,7 +37,8 @@ tb_layvideotron.init({
     type: DataTypes.DATE
   },
   status: {
-    type: DataTypes.STRING
+    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
+    defaultValue: 'Pending',  
   },
   disposisi: {
     type: DataTypes.STRING

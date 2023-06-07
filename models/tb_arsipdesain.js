@@ -40,7 +40,8 @@ tb_arsipdesain.init({
     type: DataTypes.DATE
   },
   status: {
-    type: DataTypes.STRING
+    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
+    defaultValue: 'Pending',  
   },
   lampiran_file: {
     type: DataTypes.STRING
