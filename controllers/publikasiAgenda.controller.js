@@ -55,10 +55,56 @@ module.exports = {
             await agenda.save()
 
             res.status(201).json({
-                message: `Agenda berhasil ditambahkan.`,
+                message: `Agenda baru berhasil ditambahkan.`,
                 data: agenda
             })
             
+        } catch (error) {
+            res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            })
+        }
+    },
+    editAgenda: async(req, res) => {
+        const { id } = req.params
+        const payload = req.body
+        try {
+            const agenda = await PublikasiAgenda.findByPk(id)
+            if(agenda) {
+                Object.assign(agenda, payload)
+                await agenda.save()
+
+                res.status(200).json({
+                    message: `Agenda berhasil diperbarui`,
+                    data: agenda
+                })
+            } else {
+                res.status(404).json({
+                    message: 'Data kegiatan tidak ditemukan.'
+                })
+            }
+        } catch (error) {
+            res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            })
+        }
+    },
+    deleteAgenda: async(req, res) => {
+        const { id } = req.params
+        try {
+            const agenda = await PublikasiAgenda.findByPk(id)
+            if(agenda) {
+                await agenda.destroy()
+
+                res.status(200).json({
+                    message: `Agenda berhasil dihapus`,
+                    data: agenda
+                })
+            } else {
+                res.status(404).json({
+                    message: 'Agenda tidak ditemukan.'
+                })
+            }
         } catch (error) {
             res.status(500).json({
                 message: error.message || 'Internal Server Error'
