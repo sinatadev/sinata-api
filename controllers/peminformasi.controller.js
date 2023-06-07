@@ -1,15 +1,15 @@
-const Konpers = require('../models/tb_laykonpers')
+const PembaruanInformasis = require('../models/tb_laypeminformasi')
 const Accounts = require('../models/tb_account')
 
 module.exports = {
-    viewKonpers: async (req, res) => {
+    viewPeminformasi: async (req, res) => {
         const page = req.query.page || 1
         const limit = parseInt(req.query.limit) || 5
         const offset = (page - 1) * limit
         try {
-            const totalRow = await Konpers.count()
+            const totalRow = await PembaruanInformasis.count()
             const totalPage = Math.ceil(totalRow / limit)
-            const konpers = await Konpers.findAll({
+            const peminformasi = await PembaruanInformasis.findAll({
                 include: {
                     model: Accounts,
                     required: true
@@ -21,60 +21,58 @@ module.exports = {
                 ]
             })
 
-            const modifiedKonpers = konpers.map(item => {
+            const modifiedPeminformasi = peminformasi.map(item => {
                 const modifiedItem = { ...item.toJSON() }
                 modifiedItem.tb_account.password = undefined
                 return modifiedItem
             })
 
             res.status(200).json({
-                message: `Berhasil menampilkan ${konpers.length} Layanan Konferensi Pers`,
+                message: `Berhasil menampilkan ${peminformasi.length} Layanan Pembaruan Informasi di Laman UNS`,
                 page,
                 totalPage,
                 totalRow,
                 rowsPerPage: limit,
-                data: modifiedKonpers
+                data: modifiedPeminformasi
             })
-
         } catch (error) {
             res.status(500).json({
                 message: error.message || 'Internal Server Error'
             })
         }
     },
-    addKonpers: async (req, res) => {
+    addPeminformasi: async (req, res) => {
         const payload = req.body
         try {
-            const konpers = await Konpers.create(payload)
-            await konpers.save()
+            const peminformasi = await PembaruanInformasis.create(payload)
+            await peminformasi.save()
 
             res.status(201).json({
-                message: `Konferensi Pers '${payload.judul_kegiatan}' berhasil ditambahkan.`,
-                data: konpers
+                message: `Layanan '${payload.judul_permohonan}' berhasil ditambahkan.`,
+                data: peminformasi
             })
-
         } catch (error) {
             res.status(500).json({
                 message: error.message || 'Internal Server Error'
             })
         }
     },
-    editKonpers: async (req, res) => {
+    editPeminformasi: async (req, res) => {
         const { id } = req.params
         const payload = req.body
         try {
-            const konpers = await Konpers.findByPk(id)
-            if(konpers) {
-                Object.assign(konpers, payload)
-                await konpers.save()
+            const peminformasi = await PembaruanInformasis.findByPk(id)
+            if(peminformasi) {
+                Object.assign(peminformasi, payload)
+                await peminformasi.save()
 
                 res.status(200).json({
-                    message: `Konferensi Pers '${payload.judul_kegiatan}' berhasil diperbarui`,
-                    data: konpers
+                    message: `Layanan '${payload.judul_permohonan}' berhasil diperbarui`,
+                    data: peminformasi
                 })
-            } else {
+            } else{
                 res.status(404).json({
-                    message: 'Data konferensi pers tidak ditemukan.'
+                    message: 'Data permbaruan informasi di laman tidak ditemukan.'
                 })
             }
         } catch (error) {
@@ -83,19 +81,19 @@ module.exports = {
             })
         }
     },
-    deleteKonper: async (req, res) => {
+    deletePemInformasi: async (req, res) => {
         const { id } = req.params
         try {
-            const konpers = await Konpers.findByPk(id)
-            if(konpers) {
-                await konpers.destroy()
+            const peminformasi = await PembaruanInformasis.findByPk(id)
+            if(peminformasi) {
+                await peminformasi.destroy()
 
                 res.status(200).json({
-                    message: `Konferensi Pers '${konpers.judul_kegiatan}' berhasil dihapus`,
+                    message: `Data '${peminformasi.judul_permohonan}' berhasil dihapus`,
                 })
             } else {
                 res.status(404).json({
-                    message: 'Data konferensi pers tidak ditemukan.'
+                    message: 'Data permbaruan informasi di laman tidak ditemukan.'
                 })
             }
         } catch (error) {
