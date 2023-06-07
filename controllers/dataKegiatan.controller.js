@@ -7,7 +7,7 @@ module.exports = {
         const limit = parseInt(req.query.limit) || 5
         const offset = (page - 1) * limit
         try {
-            const totalRow = await Accounts.count()
+            const totalRow = await Kegiatans.count()
             const totalPage = Math.ceil(totalRow / limit)
             const kegiatan = await Kegiatans.findAll({
                 include: {

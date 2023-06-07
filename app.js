@@ -7,7 +7,7 @@ const sequelize = require('./config/connection')
 const authRouter = require('./routes/auth.route')
 const accountsRouter = require('./routes/accounts.route')
 const dataKegiatanRouter = require('./routes/dataKegiatan.route')
-const publikasiAgenda = require('./routes/publikasiAgenda.route')
+const publikasiAgendaRouter = require('./routes/publikasiAgenda.route')
 const { isLoginUser } = require('./middlewares/auth.middleware')
 
 const app = express()
@@ -29,7 +29,7 @@ app.get('/', async (req, res) => {
 app.use(`${URL}/auth`, authRouter)
 app.use(`${URL}/users`, accountsRouter)
 app.use(`${URL}/data-kegiatan`, dataKegiatanRouter)
-app.use(`${URL}/publikasi-agenda`, publikasiAgenda)
+app.use(`${URL}/publikasi-agenda`, publikasiAgendaRouter)
 
 app.get(`${URL}/checkLoginUser`, isLoginUser)
 
