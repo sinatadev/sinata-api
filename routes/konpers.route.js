@@ -3,10 +3,19 @@ var router = express.Router()
 
 const { isLoginSuperAdmin } = require('../middlewares/auth.middleware')
 const { viewKonpers, addKonpers, editKonpers, deleteKonper } = require('../controllers/konpers.controller')
+const upload = require('../utils/upload.util')
 
 router.get('/lihat', isLoginSuperAdmin, viewKonpers)
-router.post('/tambah', isLoginSuperAdmin, addKonpers)
-router.put('/:id/edit', isLoginSuperAdmin, editKonpers)
+router.post('/tambah', isLoginSuperAdmin, upload.fields([
+    { name: 'surat_permohonan', maxCount: 1 },
+    { name: 'leaflet_kegiatan', maxCount: 1 },
+    { name: 'disposisi', maxCount: 1 },
+]), addKonpers)
+router.put('/:id/edit', isLoginSuperAdmin,upload.fields([
+    { name: 'surat_permohonan', maxCount: 1 },
+    { name: 'leaflet_kegiatan', maxCount: 1 },
+    { name: 'disposisi', maxCount: 1 },
+]), editKonpers)
 router.delete('/:id/delete', isLoginSuperAdmin, deleteKonper)
 
 module.exports = router
