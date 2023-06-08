@@ -1,5 +1,6 @@
 const ArsipDesains = require('../models/tb_arsipdesain')
 const Accounts = require('../models/tb_account')
+const deleteFile = require('../utils/deleteFIle.util')
 
 module.exports = {
     viewArsipDesain: async (req, res) => {
@@ -93,6 +94,9 @@ module.exports = {
             const arsipDesain = await ArsipDesains.findByPk(id)
             
             if(arsipDesain) {
+                if(arsipDesain.lampiran_file) {
+                    deleteFile(arsipDesain.lampiran_file)
+                }
                 await arsipDesain.destroy()
 
                 res.status(200).json({

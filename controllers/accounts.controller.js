@@ -1,4 +1,5 @@
 const Accounts = require('../models/tb_account')
+const deleteFile = require('../utils/deleteFIle.util')
 const { hashPassword } = require('../utils/password.util')
 const { Op } = require('sequelize')
 
@@ -138,7 +139,9 @@ module.exports = {
                     message: 'Akun tidak ditemukan.'
                 })
             }
-
+            if(user.img_profil) {
+                deleteFile(user.img_profil)
+            }
             await user.destroy()
 
             res.status(200).json({

@@ -1,5 +1,6 @@
 const PembaruanInformasis = require('../models/tb_laypeminformasi')
 const Accounts = require('../models/tb_account')
+const deleteFile = require('../utils/deleteFIle.util')
 
 module.exports = {
     viewPeminformasi: async (req, res) => {
@@ -110,6 +111,15 @@ module.exports = {
         try {
             const peminformasi = await PembaruanInformasis.findByPk(id)
             if(peminformasi) {
+                if(peminformasi.surat_permohonan) {
+                    deleteFile(peminformasi.surat_permohonan)
+                }
+                if(peminformasi.bahan_publikasi) {
+                    deleteFile(peminformasi.bahan_publikasi)
+                }
+                if(peminformasi.disposisi) {
+                    deleteFile(peminformasi.disposisi)
+                }
                 await peminformasi.destroy()
 
                 res.status(200).json({

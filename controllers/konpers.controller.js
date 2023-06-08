@@ -1,5 +1,6 @@
 const Konpers = require('../models/tb_laykonpers')
 const Accounts = require('../models/tb_account')
+const deleteFile = require('../utils/deleteFIle.util')
 
 module.exports = {
     viewKonpers: async (req, res) => {
@@ -112,6 +113,15 @@ module.exports = {
         try {
             const konpers = await Konpers.findByPk(id)
             if(konpers) {
+                if(konpers.surat_permohonan) {
+                    deleteFile(konpers.surat_permohonan)
+                }
+                if(konpers.leaflet_kegiatan){
+                    deleteFile(konpers.leaflet_kegiatan)
+                }
+                if(konpers.disposisi){
+                    deleteFile(konpers.disposisi)
+                }
                 await konpers.destroy()
 
                 res.status(200).json({
