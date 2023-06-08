@@ -46,6 +46,18 @@ module.exports = {
         const payload = req.body
         try {
             const konpers = await Konpers.create(payload)
+            if(req.files.surat_permohonan) {
+                const { surat_permohonan } = req.files
+                konpers.surat_permohonan = surat_permohonan[0].filename
+            }
+            if(req.files.leaflet_kegiatan) {
+                const { leaflet_kegiatan } = req.files
+                konpers.leaflet_kegiatan = leaflet_kegiatan[0].filename
+            }
+            if(req.files.disposisi) {
+                const { disposisi } = req.files
+                konpers.disposisi = disposisi[0].filename
+            }
             await konpers.save()
 
             res.status(201).json({
@@ -66,6 +78,18 @@ module.exports = {
             const konpers = await Konpers.findByPk(id)
             if(konpers) {
                 Object.assign(konpers, payload)
+                if(req.files.surat_permohonan) {
+                    const { surat_permohonan } = req.files
+                    konpers.surat_permohonan = surat_permohonan[0].filename
+                }
+                if(req.files.leaflet_kegiatan) {
+                    const { leaflet_kegiatan } = req.files
+                    konpers.leaflet_kegiatan = leaflet_kegiatan[0].filename
+                }
+                if(req.files.disposisi) {
+                    const { disposisi } = req.files
+                    konpers.disposisi = disposisi[0].filename
+                }
                 await konpers.save()
 
                 res.status(200).json({

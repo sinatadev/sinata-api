@@ -7,25 +7,46 @@ module.exports = {
         const page = req.query.page || 1
         const limit = parseInt(req.query.limit) || 5
         const offset = (page - 1) * limit
+        const status = req.query.status || null
         try {
             const totalRow = await PublikasiAgenda.count()
             const totalPage = Math.ceil(totalRow / limit)
-            const agenda = await PublikasiAgenda.findAll({ 
-                include: {
-                    model: DataKegiatan,
-                    required: true,
+            let agenda
+
+            if(status) {
+                agenda = await PublikasiAgenda.findAll({ 
                     include: {
-                        model: Accounts,
-                        required: true
-                    }
-                },
-                where: { status: 'Complete' }, 
-                limit: limit,
-                offset,
-                order: [
-                    ['createdAt', 'DESC']
-                ]
-            })
+                        model: DataKegiatan,
+                        required: true,
+                        include: {
+                            model: Accounts,
+                            required: true
+                        }
+                    },
+                    where: { status }, 
+                    limit: limit,
+                    offset,
+                    order: [
+                        ['createdAt', 'DESC']
+                    ]
+                })
+            } else {
+                agenda = await PublikasiAgenda.findAll({ 
+                    include: {
+                        model: DataKegiatan,
+                        required: true,
+                        include: {
+                            model: Accounts,
+                            required: true
+                        }
+                    },
+                    limit: limit,
+                    offset,
+                    order: [
+                        ['createdAt', 'DESC']
+                    ]
+                })
+            }
 
             const modifiedAgenda = agenda.map(item => {
                 const modifiedItem = { ...item.toJSON() }
@@ -50,8 +71,17 @@ module.exports = {
     addAgenda: async(req, res) => {
         try {
             const payload = req.body
-
             const agenda = await PublikasiAgenda.create(payload)
+
+            if(req.file) {
+                try {
+                    agenda.leaflet_kegiatan = req.file.filename
+                } catch (error) {
+                    res.status(500).json({
+                        message: error.message || 'Internal Server Error'
+                    })        
+                }
+            }
             await agenda.save()
 
             res.status(201).json({
@@ -72,6 +102,16 @@ module.exports = {
             const agenda = await PublikasiAgenda.findByPk(id)
             if(agenda) {
                 Object.assign(agenda, payload)
+                
+                if(req.file) {
+                    try {
+                        agenda.leaflet_kegiatan = req.file.filename
+                    } catch (error) {
+                        res.status(500).json({
+                            message: error.message || 'Internal Server Error'
+                        })        
+                    }
+                }
                 await agenda.save()
 
                 res.status(200).json({

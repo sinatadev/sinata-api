@@ -45,6 +45,18 @@ module.exports = {
         const payload = req.body
         try {
             const peminformasi = await PembaruanInformasis.create(payload)
+            if(req.files.surat_permohonan) {
+                const { surat_permohonan } = req.files
+                peminformasi.surat_permohonan = surat_permohonan[0].filename
+            }
+            if(req.files.bahan_publikasi) {
+                const { bahan_publikasi } = req.files
+                peminformasi.bahan_publikasi = bahan_publikasi[0].filename
+            }
+            if(req.files.disposisi) {
+                const { disposisi } = req.files
+                peminformasi.disposisi = disposisi[0].filename
+            }
             await peminformasi.save()
 
             res.status(201).json({
@@ -64,6 +76,18 @@ module.exports = {
             const peminformasi = await PembaruanInformasis.findByPk(id)
             if(peminformasi) {
                 Object.assign(peminformasi, payload)
+                if(req.files.surat_permohonan) {
+                    const { surat_permohonan } = req.files
+                    peminformasi.surat_permohonan = surat_permohonan[0].filename
+                }
+                if(req.files.bahan_publikasi) {
+                    const { bahan_publikasi } = req.files
+                    peminformasi.bahan_publikasi = bahan_publikasi[0].filename
+                }
+                if(req.files.disposisi) {
+                    const { disposisi } = req.files
+                    peminformasi.disposisi = disposisi[0].filename
+                }
                 await peminformasi.save()
 
                 res.status(200).json({

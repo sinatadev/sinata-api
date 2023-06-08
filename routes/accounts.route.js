@@ -1,8 +1,9 @@
 var express = require('express')
 var router = express.Router()
 
-const { viewUsers, addUsers, editUser, deleteUser, changeAvatar, upload } = require('../controllers/accounts.controller')
+const { viewUsers, addUsers, editUser, deleteUser, changeAvatar } = require('../controllers/accounts.controller')
 const { isLoginSuperAdmin } = require('../middlewares/auth.middleware')
+const upload = require('../utils/upload.util')
 
 router.get('/lihat', isLoginSuperAdmin, viewUsers)
 router.post('/tambah', isLoginSuperAdmin, addUsers)
