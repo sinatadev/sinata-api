@@ -1,6 +1,7 @@
 const PublikasiAgenda = require('../models/tb_laypubagenda')
 const DataKegiatan = require('../models/tb_kegiatan')
 const Accounts = require('../models/tb_account')
+const deleteFile = require('../utils/deleteFIle.util')
 
 module.exports = {
     viewAgenda: async(req, res) => {
@@ -134,6 +135,9 @@ module.exports = {
         try {
             const agenda = await PublikasiAgenda.findByPk(id)
             if(agenda) {
+                if(agenda.leaflet_kegiatan) {
+                    deleteFile(agenda.leaflet_kegiatan)
+                }
                 await agenda.destroy()
 
                 res.status(200).json({
