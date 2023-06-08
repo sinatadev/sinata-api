@@ -11,6 +11,7 @@ const publikasiAgendaRouter = require('./routes/publikasiAgenda.route')
 const konpersRouter = require('./routes/konpers.route')
 const peminformasiRouter = require('./routes/peminformasi.route')
 const arsipDesainRouter = require('./routes/arsipDesain.route')
+const opiniRouter = require('./routes/opini.route')
 
 const { isLoginUser } = require('./middlewares/auth.middleware')
 
@@ -37,8 +38,7 @@ app.use(`${URL}/publikasi-agenda`, publikasiAgendaRouter)
 app.use(`${URL}/konpers`, konpersRouter)
 app.use(`${URL}/pembaruan-informasi`, peminformasiRouter)
 app.use(`${URL}/arsip-desain`, arsipDesainRouter)
-
-app.get(`${URL}/checkLoginUser`, isLoginUser)
+app.use(`${URL}/opini`, opiniRouter)
 
 app.listen(port, () => {
     console.log(`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`)
