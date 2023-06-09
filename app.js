@@ -1,8 +1,7 @@
 require('dotenv').config()
 
-const express = require('express')
-const sequelize = require('./config/connection')
-// const tb_account = require('./models/tb_account')
+var express = require('express')
+var sequelize = require('./config/connection')
 
 const authRouter = require('./routes/auth.route')
 const accountsRouter = require('./routes/accounts.route')
@@ -13,8 +12,7 @@ const peminformasiRouter = require('./routes/peminformasi.route')
 const arsipDesainRouter = require('./routes/arsipDesain.route')
 const opiniRouter = require('./routes/opini.route')
 const balihoRouter = require('./routes/baliho.route')
-
-const { isLoginUser } = require('./middlewares/auth.middleware')
+const videotronRouter = require('./routes/videotron.route')
 
 const app = express()
 const port = process.env.PORT || 3030
@@ -41,6 +39,7 @@ app.use(`${URL}/pembaruan-informasi`, peminformasiRouter)
 app.use(`${URL}/arsip-desain`, arsipDesainRouter)
 app.use(`${URL}/opini`, opiniRouter)
 app.use(`${URL}/baliho`, balihoRouter)
+app.use(`${URL}/videotron`, videotronRouter)
 
 app.listen(port, () => {
     console.log(`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`)
