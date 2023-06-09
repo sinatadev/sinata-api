@@ -11,7 +11,7 @@ async function generateOpiniData() {
       id_account: '326d958b-c313-441a-af4f-b2932e2b52ed',
       judul_pembahasan: 'Resolusi PPDB SMA 2023 Berdasar Keberpihakan pada Siswa',
       surat_permohonan: 'surat-permohonan-a.pdf',
-      foto_penulis: 'Atiek Rachmawati',
+      foto_penulis: 'foto-penulis-a.jpg',
       bahan_publikasi: 'bahan-publikasi-a.pdf',
       status: 'Complete',
       disposisi: 'disposisi-a.pdf',

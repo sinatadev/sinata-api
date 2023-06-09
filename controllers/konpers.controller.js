@@ -108,7 +108,7 @@ module.exports = {
             })
         }
     },
-    deleteKonper: async (req, res) => {
+    deleteKonpers: async (req, res) => {
         const { id } = req.params
         try {
             const konpers = await Konpers.findByPk(id)
