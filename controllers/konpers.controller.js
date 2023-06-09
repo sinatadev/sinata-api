@@ -81,14 +81,23 @@ module.exports = {
                 Object.assign(konpers, payload)
                 if(req.files.surat_permohonan) {
                     const { surat_permohonan } = req.files
+                    if(konpers.surat_permohonan){
+                        deleteFile(konpers.surat_permohonan)
+                    }
                     konpers.surat_permohonan = surat_permohonan[0].filename
                 }
                 if(req.files.leaflet_kegiatan) {
                     const { leaflet_kegiatan } = req.files
+                    if(konpers.leaflet_kegiatan){
+                        deleteFile(konpers.leaflet_kegiatan)
+                    }
                     konpers.leaflet_kegiatan = leaflet_kegiatan[0].filename
                 }
                 if(req.files.disposisi) {
                     const { disposisi } = req.files
+                    if(konpers.disposisi){
+                        deleteFile(konpers.disposisi)
+                    }
                     konpers.disposisi = disposisi[0].filename
                 }
                 await konpers.save()
