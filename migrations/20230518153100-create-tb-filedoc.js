@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
       },
-      id_file: {
+      id_dokumentasi: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
@@ -26,9 +26,6 @@ module.exports = {
       size_file: {
         type: Sequelize.INTEGER
       },
-      data_file: {
-        type: Sequelize.TEXT
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -40,7 +37,7 @@ module.exports = {
     });
 
     await queryInterface.addConstraint('tb_filedoc', {
-      fields: ['id_file'],
+      fields: ['id_dokumentasi'],
       type: 'foreign key',
       name: 'fk_tb_filedoc_tb_dokumentasi',
       references: {

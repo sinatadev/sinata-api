@@ -20,7 +20,7 @@ tb_filedoc.init({
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4
   },
-  id_file: {
+  id_dokumentasi: {
     type: DataTypes.UUID,
     allowNull: false,
     references: {
@@ -36,9 +36,6 @@ tb_filedoc.init({
   },
   size_file: {
     type: DataTypes.INTEGER
-  },
-  data_file: {
-    type: DataTypes.TEXT
   }
 }, {
   sequelize,
@@ -46,7 +43,7 @@ tb_filedoc.init({
   freezeTableName: true
 });
 
-tb_filedoc.belongsTo(tb_dokumentasi, { foreignKey: 'id_file' })
-tb_dokumentasi.hasMany(tb_filedoc, { foreignKey: 'id_file' })
+tb_filedoc.belongsTo(tb_dokumentasi, { foreignKey: 'id_dokumentasi' })
+tb_dokumentasi.hasMany(tb_filedoc, { foreignKey: 'id_dokumentasi' })
 
 module.exports = tb_filedoc
