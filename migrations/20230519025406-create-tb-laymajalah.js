@@ -39,8 +39,21 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+
+    await queryInterface.addConstraint('tb_laymajalah', {
+      fields: ['id_kegiatan'],
+      type: 'foreign key',
+      name: 'fk_tb_laymajalah_tb_kegiatan',
+      references: {
+        table: 'tb_kegiatan',
+        field: 'id'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    })
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeConstraint('tb_laymajalah', 'fk_tb_laymajalah_tb_kegiatan')
     await queryInterface.dropTable('tb_laymajalah');
   }
 };

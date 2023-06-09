@@ -1,6 +1,7 @@
 'use strict';
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');
+const tb_kegiatan = require('./tb_kegiatan');
 
 class tb_laybaliho extends Model {
   /**
@@ -54,5 +55,8 @@ tb_laybaliho.init({
   modelName: 'tb_laybaliho',
   freezeTableName : true
 })
+
+tb_laybaliho.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' })
+tb_kegiatan.hasMany(tb_laybaliho, { foreignKey: 'id' })
 
 module.exports = tb_laybaliho

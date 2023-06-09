@@ -1,6 +1,7 @@
 'use strict';
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');
+const tb_kegiatan = require('./tb_kegiatan');
 
 class tb_layvideotron extends Model {
   /**
@@ -51,5 +52,8 @@ tb_layvideotron.init({
   modelName: 'tb_layvideotron',
   freezeTableName: true
 });
+
+tb_layvideotron.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' })
+tb_kegiatan.hasMany(tb_layvideotron, { foreignKey: 'id_kegiatan' })
 
 module.exports = tb_layvideotron
