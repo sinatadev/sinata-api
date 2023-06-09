@@ -69,8 +69,8 @@ module.exports = {
         }
     },
     addAgenda: async(req, res) => {
+        const payload = req.body
         try {
-            const payload = req.body
             const agenda = await PublikasiAgendas.create(payload)
 
             if(req.file) {
@@ -105,6 +105,9 @@ module.exports = {
                 
                 if(req.file) {
                     try {
+                        if(agenda.leaflet_kegiatan) {
+                            deleteFile(agenda.leaflet_kegiatan)
+                        }
                         agenda.leaflet_kegiatan = req.file.filename
                     } catch (error) {
                         res.status(500).json({
