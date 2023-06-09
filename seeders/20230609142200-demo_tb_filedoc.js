@@ -11,7 +11,7 @@ async function generateFileDokumentasi() {
       id_dokumentasi: '5gba612h-c313-441a-af4f-b2932e87bha5',
       nama_file: 'file-1.jpg',
       tipe_file: 'jpg',
-      size_files: '516kb',
+      size_file: 528,
       createdAt: now,
       updatedAt: now
     },
@@ -20,7 +20,7 @@ async function generateFileDokumentasi() {
       id_dokumentasi: '5gba612h-c313-441a-af4f-b2932e87bha5',
       nama_file: 'file-2.jpg',
       tipe_file: 'jpg',
-      size_files: '312kb',
+      size_file: 321,
       createdAt: now,
       updatedAt: now
     }

@@ -20,7 +20,7 @@ async function generateArsipPers() {
       waktu_upload_terj: '2022-07-05 13:26:00',
       admin_terj: 'Admin 1',
       link_terj: 'https://uns.ac.id/en/uns-update/uhasd7123b',
-      status: 'Selesai',
+      status_publikasi: 'Selesai',
       createdAt: now,
       updatedAt: now
     }
