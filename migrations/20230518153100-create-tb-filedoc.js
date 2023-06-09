@@ -38,8 +38,21 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+
+    await queryInterface.addConstraint('tb_filedoc', {
+      fields: ['id_file'],
+      type: 'foreign key',
+      name: 'fk_tb_filedoc_tb_dokumentasi',
+      references: {
+        table: 'tb_dokumentasi',
+        field: 'id'
+      },
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    })
   },
   async down(queryInterface, Sequelize) {
+    await queryInterface.removeConstraint('tb_filedoc', 'fk_tb_filedoc_tb_dokumentasi')
     await queryInterface.dropTable('tb_filedoc');
   }
 };

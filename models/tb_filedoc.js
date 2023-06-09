@@ -1,6 +1,7 @@
 'use strict';
 const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');
+const tb_dokumentasi = require('../models/tb_dokumentasi')
 
 class tb_filedoc extends Model {
   /**
@@ -44,5 +45,8 @@ tb_filedoc.init({
   modelName: 'tb_filedoc',
   freezeTableName: true
 });
+
+tb_filedoc.belongsTo(tb_dokumentasi, { foreignKey: 'id_file' })
+tb_dokumentasi.hasMany(tb_filedoc, { foreignKey: 'id_file' })
 
 module.exports = tb_filedoc
