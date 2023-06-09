@@ -61,9 +61,9 @@ tb_arsip_pers.init({
   link_terj: {
     type: DataTypes.STRING
   },
-  status: {
-    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
-    defaultValue: 'Pending',  
+  status_publikasi: {
+    type: DataTypes.ENUM('ID', 'EN', 'Selesai'),
+    defaultValue: 'ID',  
   },
 }, {
   sequelize,

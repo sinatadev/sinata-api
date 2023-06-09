@@ -50,9 +50,9 @@ module.exports = {
       link_terj: {
         type: Sequelize.STRING
       },
-      status: {
-        type: Sequelize.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
-        defaultValue: 'Pending',    
+      status_publikasi: {
+        type: Sequelize.ENUM('ID', 'EN', 'Selesai'),
+        defaultValue: 'ID',    
       },
       createdAt: {
         allowNull: false,
