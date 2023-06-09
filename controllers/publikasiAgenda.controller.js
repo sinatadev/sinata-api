@@ -1,5 +1,5 @@
-const PublikasiAgenda = require('../models/tb_laypubagenda')
-const DataKegiatan = require('../models/tb_kegiatan')
+const PublikasiAgendas = require('../models/tb_laypubagenda')
+const DataKegiatans = require('../models/tb_kegiatan')
 const Accounts = require('../models/tb_account')
 const deleteFile = require('../utils/deleteFIle.util')
 
@@ -10,14 +10,13 @@ module.exports = {
         const offset = (page - 1) * limit
         const status = req.query.status || null
         try {
-            const totalRow = await PublikasiAgenda.count()
+            const totalRow = await PublikasiAgendas.count()
             const totalPage = Math.ceil(totalRow / limit)
             let agenda
-
             if(status) {
-                agenda = await PublikasiAgenda.findAll({ 
+                agenda = await PublikasiAgendas.findAll({ 
                     include: {
-                        model: DataKegiatan,
+                        model: DataKegiatans,
                         required: true,
                         include: {
                             model: Accounts,
@@ -32,9 +31,9 @@ module.exports = {
                     ]
                 })
             } else {
-                agenda = await PublikasiAgenda.findAll({ 
+                agenda = await PublikasiAgendas.findAll({ 
                     include: {
-                        model: DataKegiatan,
+                        model: DataKegiatans,
                         required: true,
                         include: {
                             model: Accounts,
@@ -72,7 +71,7 @@ module.exports = {
     addAgenda: async(req, res) => {
         try {
             const payload = req.body
-            const agenda = await PublikasiAgenda.create(payload)
+            const agenda = await PublikasiAgendas.create(payload)
 
             if(req.file) {
                 try {
@@ -100,7 +99,7 @@ module.exports = {
         const { id } = req.params
         const payload = req.body
         try {
-            const agenda = await PublikasiAgenda.findByPk(id)
+            const agenda = await PublikasiAgendas.findByPk(id)
             if(agenda) {
                 Object.assign(agenda, payload)
                 
@@ -133,7 +132,7 @@ module.exports = {
     deleteAgenda: async(req, res) => {
         const { id } = req.params
         try {
-            const agenda = await PublikasiAgenda.findByPk(id)
+            const agenda = await PublikasiAgendas.findByPk(id)
             if(agenda) {
                 if(agenda.leaflet_kegiatan) {
                     deleteFile(agenda.leaflet_kegiatan)
