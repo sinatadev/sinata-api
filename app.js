@@ -13,6 +13,7 @@ const arsipDesainRouter = require('./routes/arsipDesain.route')
 const opiniRouter = require('./routes/opini.route')
 const balihoRouter = require('./routes/baliho.route')
 const videotronRouter = require('./routes/videotron.route')
+const liveStreamingRouter = require('./routes/livestreaming.route')
 
 const app = express()
 const port = process.env.PORT || 3030
@@ -40,6 +41,7 @@ app.use(`${URL}/arsip-desain`, arsipDesainRouter)
 app.use(`${URL}/opini`, opiniRouter)
 app.use(`${URL}/baliho`, balihoRouter)
 app.use(`${URL}/videotron`, videotronRouter)
+app.use(`${URL}/live-streaming`, liveStreamingRouter)
 
 app.listen(port, () => {
     console.log(`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`)
