@@ -31,6 +31,21 @@ tb_arsip_pers.init({
   no_rilis: {
     type: DataTypes.STRING
   },
+  judul_berita: {
+    type: DataTypes.STRING
+  },
+  kategori: {
+    type: DataTypes.STRING
+  },
+  jurnalis: {
+    type: DataTypes.STRING
+  },
+  prarilis: {
+    type: DataTypes.TEXT
+  },
+  rilis: {
+    type: DataTypes.TEXT
+  },
   tgl_upload: {
     type: DataTypes.DATE
   },
@@ -43,11 +58,14 @@ tb_arsip_pers.init({
   link_berita: {
     type: DataTypes.STRING
   },
+  judul_terjemahan: {
+    type: DataTypes.STRING
+  },
   penerjemah: {
     type: DataTypes.STRING
   },
-  judul_terjemahan: {
-    type: DataTypes.STRING
+  naskah_terj: {
+    type: DataTypes.TEXT
   },
   tgl_upload_terj: {
     type: DataTypes.DATE

@@ -28,12 +28,6 @@ tb_laypeliputan.init({
       key: 'id'
     }
   },
-  judul_berita: {
-    type: DataTypes.STRING
-  },
-  kategori: {
-    type: DataTypes.STRING
-  },
   leaflet_kegiatan: {
     type: DataTypes.STRING
   },
@@ -44,13 +38,7 @@ tb_laypeliputan.init({
   disposisi: {
     type: DataTypes.STRING
   },
-  jurnalis: {
-    type: DataTypes.STRING
-  },
-  prarilis: {
-    type: DataTypes.TEXT
-  },
-  rilis: {
+  keterangan: {
     type: DataTypes.TEXT
   }
 }, {

@@ -20,6 +20,21 @@ module.exports = {
       no_rilis: {
         type: Sequelize.STRING
       },
+      judul_berita: {
+        type: Sequelize.STRING
+      },
+      kategori: {
+        type: Sequelize.STRING
+      },
+      jurnalis: {
+        type: Sequelize.STRING
+      },
+      prarilis: {
+        type: Sequelize.TEXT
+      },
+      rilis: {
+        type: Sequelize.TEXT
+      },
       tgl_upload: {
         type: Sequelize.DATE
       },
@@ -32,11 +47,14 @@ module.exports = {
       link_berita: {
         type: Sequelize.STRING
       },
+      judul_terjemahan: {
+        type: Sequelize.STRING
+      },
       penerjemah: {
         type: Sequelize.STRING
       },
-      judul_terjemahan: {
-        type: Sequelize.STRING
+      naskah_terj: {
+        type: Sequelize.TEXT
       },
       tgl_upload_terj: {
         type: Sequelize.DATE
