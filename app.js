@@ -16,6 +16,7 @@ const videotronRouter = require('./routes/videotron.route')
 const liveStreamingRouter = require('./routes/livestreaming.route')
 const majalahRouter = require('./routes/majalah.route')
 const peliputanRouter = require('./routes/peliputan.route')
+const arsipPersRouter = require('./routes/arsipPers.route')
 
 const app = express()
 const port = process.env.PORT || 3030
@@ -46,6 +47,7 @@ app.use(`${URL}/videotron`, videotronRouter)
 app.use(`${URL}/live-streaming`, liveStreamingRouter)
 app.use(`${URL}/majalah`, majalahRouter)
 app.use(`${URL}/peliputan`, peliputanRouter)
+app.use(`${URL}/arsip-pers`, arsipPersRouter)
 
 app.listen(port, () => {
     console.log(`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`)
