@@ -122,7 +122,6 @@ module.exports = {
 
                 res.status(200).json({
                     message: `Layanan publikasi di majalah berhasil dihapus.`,
-                    data: majalah
                 })
             } else {
                 res.status(404).json({
