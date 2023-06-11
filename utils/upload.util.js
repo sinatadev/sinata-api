@@ -7,7 +7,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         let originalExt = file.originalname.split('.')[file.originalname.split('.').length - 1]
-        cb(null, uuidv4() + '-' + Date.now() + '-' + req.user.username + '.' + originalExt)
+        cb(null, uuidv4() + '-' + req.user.username + '-' + Date.now() + '.' + originalExt)
     }
 })
 
