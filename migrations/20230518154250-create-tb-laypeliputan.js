@@ -17,12 +17,6 @@ module.exports = {
           key: 'id'
         }
       },
-      judul_berita: {
-        type: Sequelize.STRING
-      },
-      kategori: {
-        type: Sequelize.STRING
-      },
       leaflet_kegiatan: {
         type: Sequelize.STRING
       },
@@ -33,15 +27,9 @@ module.exports = {
       disposisi: {
         type: Sequelize.STRING
       },
-      jurnalis: {
-        type: Sequelize.STRING
-      },
-      prarilis: {
+      keterangan: {
         type: Sequelize.TEXT
-      },
-      rilis: {
-        type: Sequelize.TEXT
-      },
+      },    
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
