@@ -18,8 +18,8 @@ jobs:
       - name: Install Depedencies
         run: npm install
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Deplot to VPS Server
+        uses: appleboy/ssh-action@master
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
