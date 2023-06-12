@@ -18,10 +18,10 @@ jobs:
       - name: Install Depedencies
         run: npm install
 
-      - name: Deplot to VPS Server
+      - name: 📂 Sync files
         uses: appleboy/ssh-action@master
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           script: |
