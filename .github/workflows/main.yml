@@ -1,4 +1,4 @@
-name: 🚀 Deploy website on push to college's vps
+name: 🚀 Deploy API on push to college's vps
 on:
   push:
     branches:
@@ -13,17 +13,18 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16.x
-          cache: npm
-      - name: Install Yarn
-        run: npm install --force yarn --locate=global
+          node-version: "16"
       - name: Install Depedencies
-        run: yarn install
+        run: npm install
 
-      - name: 📂 Sync files
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /sinata-api/
+      - name: Deploy to VPS Server
+        run: |
+          ssh m3119016@203.6.149.153 'bash -s' << EOF
+          cd /sinata-api
+          git pull origin master
+          npm install --production
+          pm2 restart app.js
+          EOF
+
+      - name: Cleanup
+        run: npm prune --production
