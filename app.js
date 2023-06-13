@@ -20,6 +20,7 @@ const peliputanRouter = require('./routes/peliputan.route')
 const arsipPersRouter = require('./routes/arsipPers.route')
 const dokumentasiRouter = require('./routes/dokumentasi.route')
 const filedocRouter = require('./routes/filedoc.route')
+const pengumumanRouter = require('./routes/pengumuman.route')
 
 const app = express()
 const port = process.env.PORT || 3030
@@ -54,6 +55,7 @@ app.use(`${URL}/peliputan`, peliputanRouter)
 app.use(`${URL}/arsip-pers`, arsipPersRouter)
 app.use(`${URL}/dokumentasi`, dokumentasiRouter)
 app.use(`${URL}/file-doc`, filedocRouter)
+app.use(`${URL}/pengumuman`, pengumumanRouter)
 
 app.listen(port, () => {
     console.log(`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`)
