@@ -2,6 +2,7 @@ require('dotenv').config()
 
 var express = require('express')
 var sequelize = require('./config/connection')
+var cors = require('cors')
 
 const authRouter = require('./routes/auth.route')
 const accountsRouter = require('./routes/accounts.route')
@@ -19,11 +20,13 @@ const peliputanRouter = require('./routes/peliputan.route')
 const arsipPersRouter = require('./routes/arsipPers.route')
 const dokumentasiRouter = require('./routes/dokumentasi.route')
 const filedocRouter = require('./routes/filedoc.route')
+const pengumumanRouter = require('./routes/pengumuman.route')
 
 const app = express()
 const port = process.env.PORT || 3030
 const URL = '/api/v1'
 
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
@@ -52,6 +55,7 @@ app.use(`${URL}/peliputan`, peliputanRouter)
 app.use(`${URL}/arsip-pers`, arsipPersRouter)
 app.use(`${URL}/dokumentasi`, dokumentasiRouter)
 app.use(`${URL}/file-doc`, filedocRouter)
+app.use(`${URL}/pengumuman`, pengumumanRouter)
 
 app.listen(port, () => {
     console.log(`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`)

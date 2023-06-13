@@ -156,5 +156,76 @@ module.exports = {
                 message: error.message || 'Internal Server Error'
             })
         }
-    }
+    },
+    viewKalenderData: async(req, res) => {
+        const page = req.query.page || 1
+        const limit = parseInt(req.query.limit) || 5
+        const offset = (page - 1) * limit
+        const status = req.query.status || null
+        try {
+            const totalRow = await PublikasiAgendas.count()
+            const totalPage = Math.ceil(totalRow / limit)
+            let agenda
+            if(status) {
+                agenda = await PublikasiAgendas.findAll({ 
+                    include: {
+                        model: DataKegiatans,
+                        required: true,
+                        include: {
+                            model: Accounts,
+                            required: true
+                        }
+                    },
+                    where: { status }, 
+                    limit: limit,
+                    offset,
+                    order: [
+                        ['createdAt', 'DESC']
+                    ]
+                })
+            } else {
+                agenda = await PublikasiAgendas.findAll({ 
+                    include: {
+                        model: DataKegiatans,
+                        required: true,
+                        include: {
+                            model: Accounts,
+                            required: true
+                        }
+                    },
+                    limit: limit,
+                    offset,
+                    order: [
+                        ['createdAt', 'DESC']
+                    ]
+                })
+            }
+
+            const modifiedAgenda = agenda.map(item => {
+                const modifiedItem = { ...item.toJSON() }
+                modifiedItem.tb_kegiatan.tb_account.password = undefined
+                return modifiedItem
+            })
+
+            const mappedAgenda = modifiedAgenda.map(item => {
+                return {
+                    id: item.id,
+                    title: item.tb_kegiatan.judul_kegiatan
+                }
+            })
+
+            res.status(200).json({
+                message: `Berhasil menampilkan ${agenda.length} Agenda Terkini`,
+                page,
+                totalPage,
+                totalRow,
+                rowsPerPage: limit,
+                data: mappedAgenda
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            })
+        }
+    },
 }
