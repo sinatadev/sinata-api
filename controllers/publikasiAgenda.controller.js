@@ -202,4 +202,35 @@ module.exports = {
             })
         }
     },
+    viewOneAgenda: async (req, res) => {
+        const { id } = req.params
+        try {
+            const agenda = await PublikasiAgendas.findAll({
+                include: {
+                    model: DataKegiatans,
+                    required:true,
+                    include: {
+                        model: Accounts,
+                        required: true
+                    }
+                },
+                where: { id }
+            })
+
+            const modifiedAgenda = agenda.map(item => {
+                const modifiedItem = { ...item.toJSON() }
+                modifiedItem.tb_kegiatan.tb_account.password = undefined
+                return modifiedItem
+            })
+
+            res.status(200).json({
+                message: 'Berhasil menampilkan detail agenda.',
+                data: modifiedAgenda
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            })
+        }
+    },
 }
