@@ -13,7 +13,7 @@ module.exports = {
                 where: { status }, 
                 limit,
                 offset,
-                order: [['createdAt', 'DESC']]
+                order: [['tgl_upload', 'DESC']]
             })
 
             res.status(200).json({
@@ -22,6 +22,21 @@ module.exports = {
                 totalPage,
                 totalRow,
                 rowsPerPage: limit,
+                data: pengumuman
+            })
+        } catch (error) {
+            res.status(500).json({
+                message: error.message || 'Internal Server Error'
+            })
+        }
+    },
+    viewOnePengumuman: async (req, res) => {
+        const { id } = req.params
+        try {
+            const pengumuman = await Pengumumans.findByPk(id)
+
+            res.status(200).json({
+                message: `Berhasil menampilkan ${pengumuman.judul_pengumuman}.`,
                 data: pengumuman
             })
         } catch (error) {

@@ -38,7 +38,7 @@ app.get('/', async (req, res) => {
         res.status(500).json('Unable to connect to the database: ' + error.message)
     }
 })
-
+app.use('/uploads', express.static('uploads'))
 app.use(`${URL}/auth`, authRouter)
 app.use(`${URL}/users`, accountsRouter)
 app.use(`${URL}/data-kegiatan`, dataKegiatanRouter)
