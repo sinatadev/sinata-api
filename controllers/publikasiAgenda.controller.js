@@ -161,56 +161,30 @@ module.exports = {
         const page = req.query.page || 1
         const limit = parseInt(req.query.limit) || 5
         const offset = (page - 1) * limit
-        const status = req.query.status || null
         try {
             const totalRow = await PublikasiAgendas.count()
             const totalPage = Math.ceil(totalRow / limit)
-            let agenda
-            if(status) {
-                agenda = await PublikasiAgendas.findAll({ 
+            const agenda = await PublikasiAgendas.findAll({ 
                     include: {
                         model: DataKegiatans,
                         required: true,
-                        include: {
-                            model: Accounts,
-                            required: true
-                        }
                     },
-                    where: { status }, 
+                    where: { status: 'Complete' }, 
                     limit: limit,
                     offset,
                     order: [
                         ['createdAt', 'DESC']
                     ]
                 })
-            } else {
-                agenda = await PublikasiAgendas.findAll({ 
-                    include: {
-                        model: DataKegiatans,
-                        required: true,
-                        include: {
-                            model: Accounts,
-                            required: true
-                        }
-                    },
-                    limit: limit,
-                    offset,
-                    order: [
-                        ['createdAt', 'DESC']
-                    ]
-                })
-            }
 
-            const modifiedAgenda = agenda.map(item => {
-                const modifiedItem = { ...item.toJSON() }
-                modifiedItem.tb_kegiatan.tb_account.password = undefined
-                return modifiedItem
-            })
-
-            const mappedAgenda = modifiedAgenda.map(item => {
+            const mappedAgenda = agenda.map(item => {
                 return {
                     id: item.id,
-                    title: item.tb_kegiatan.judul_kegiatan
+                    title: item.tb_kegiatan.judul_kegiatan,
+                    date: item.tb_kegiatan.tgl_kegiatan,
+                    description: item.tb_kegiatan.des_kegiatan,
+                    image: item.leaflet_kegiatan,
+                    link: item.id
                 }
             })
 
