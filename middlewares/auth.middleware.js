@@ -34,6 +34,7 @@ module.exports={
                     message: 'Akun Anda tidak diijinkan untuk mengakses halaman ini.',
                 })    
             }
+            next()
         }
     },
     isLoginUser: async(req, res, next) => {
@@ -72,6 +73,7 @@ module.exports={
                     message: 'Akun Anda tidak diijinkan untuk mengakses halaman ini.'
                 })    
             }
+            next()
         }
     },
     isLoginSuperAdmin: async(req, res, next) => {
@@ -110,6 +112,7 @@ module.exports={
                     message: 'Akun Anda tidak diijinkan untuk mengakses halaman ini.'
                 })    
             }
+            next()
         }
     }
 }
