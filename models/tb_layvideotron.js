@@ -13,47 +13,58 @@ class tb_layvideotron extends Model {
     // define association here
   }
 }
-tb_layvideotron.init({
-  id: {
-    allowNull: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4
+tb_layvideotron.init(
+  {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    id_kegiatan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_kegiatan',
+        key: 'id',
+      },
+    },
+    bahan_publikasi: {
+      type: DataTypes.STRING,
+    },
+    tgl_awal: {
+      type: DataTypes.DATE,
+    },
+    tgl_akhir: {
+      type: DataTypes.DATE,
+    },
+    status: {
+      type: DataTypes.ENUM(
+        'Pending',
+        'Approved & On Progress',
+        'Rejected',
+        'Complete',
+      ),
+      defaultValue: 'Pending',
+    },
+    disposisi: {
+      type: DataTypes.STRING,
+    },
+    luaran_layanan: {
+      type: DataTypes.STRING,
+    },
   },
-  id_kegiatan: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'tb_kegiatan',
-      key: 'id'
-    }
+  {
+    sequelize,
+    modelName: 'tb_layvideotron',
+    freezeTableName: true,
   },
-  bahan_publikasi: {
-    type: DataTypes.STRING
-  },
-  tgl_awal: {
-    type: DataTypes.DATE
-  },
-  tgl_akhir: {
-    type: DataTypes.DATE
-  },
-  status: {
-    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
-    defaultValue: 'Pending',  
-  },
-  disposisi: {
-    type: DataTypes.STRING
-  },
-  luaran_layanan: {
-    type: DataTypes.STRING
-  },
-}, {
-  sequelize,
-  modelName: 'tb_layvideotron',
-  freezeTableName: true
+);
+
+tb_layvideotron.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' });
+tb_kegiatan.hasMany(tb_layvideotron, {
+  as: 'tb_layvideotron',
+  foreignKey: 'id_kegiatan',
 });
 
-tb_layvideotron.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' })
-tb_kegiatan.hasMany(tb_layvideotron, { foreignKey: 'id_kegiatan' })
-
-module.exports = tb_layvideotron
+module.exports = tb_layvideotron;

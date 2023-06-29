@@ -47,6 +47,7 @@ module.exports = {
         },
       },
       {
+        tableName: 'tb_laypeliputan',
         freezeTableName: true,
       },
     );

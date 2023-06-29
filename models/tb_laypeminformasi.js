@@ -13,47 +13,58 @@ class tb_laypeminformasi extends Model {
     // define association here
   }
 }
-tb_laypeminformasi.init({
-  id: {
-    allowNull: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4
+tb_laypeminformasi.init(
+  {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    id_account: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_account',
+        key: 'id',
+      },
+    },
+    judul_permohonan: {
+      type: DataTypes.STRING,
+    },
+    surat_permohonan: {
+      type: DataTypes.STRING,
+    },
+    bahan_publikasi: {
+      type: DataTypes.STRING,
+    },
+    status: {
+      type: DataTypes.ENUM(
+        'Pending',
+        'Approved & On Progress',
+        'Rejected',
+        'Complete',
+      ),
+      defaultValue: 'Pending',
+    },
+    disposisi: {
+      type: DataTypes.STRING,
+    },
+    luaran_layanan: {
+      type: DataTypes.STRING,
+    },
   },
-  id_account: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'tb_account',
-      key: 'id'
-    }
+  {
+    sequelize,
+    modelName: 'tb_laypeminformasi',
+    freezeTableName: true,
   },
-  judul_permohonan: {
-    type: DataTypes.STRING
-  },
-  surat_permohonan: {
-    type: DataTypes.STRING
-  },
-  bahan_publikasi: {
-    type: DataTypes.STRING
-  },
-  status: {
-    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
-    defaultValue: 'Pending',  
-  },
-  disposisi: {
-    type: DataTypes.STRING
-  },
-  luaran_layanan: {
-    type: DataTypes.STRING
-  }
-}, {
-  sequelize,
-  modelName: 'tb_laypeminformasi',
-  freezeTableName: true
+);
+
+tb_laypeminformasi.belongsTo(tb_account, { foreignKey: 'id_account' });
+tb_account.hasMany(tb_laypeminformasi, {
+  as: 'tb_laypeminformasi',
+  foreignKey: 'id_account',
 });
 
-tb_laypeminformasi.belongsTo(tb_account, { foreignKey: 'id_account' })
-tb_account.hasMany(tb_laypeminformasi, { foreignKey: 'id_account' })
-
-module.exports = tb_laypeminformasi
+module.exports = tb_laypeminformasi;

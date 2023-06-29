@@ -13,34 +13,40 @@ class tb_dokumentasi extends Model {
     // define association here
   }
 }
-tb_dokumentasi.init({
-  id: {
-    allowNull: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4
+tb_dokumentasi.init(
+  {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    id_kegiatan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_kegiatan',
+        key: 'id',
+      },
+    },
+    keterangan: {
+      type: DataTypes.TEXT,
+    },
+    fotografer: {
+      type: DataTypes.STRING,
+    },
   },
-  id_kegiatan: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'tb_kegiatan',
-      key: 'id'
-    }
+  {
+    sequelize,
+    modelName: 'tb_dokumentasi',
+    freezeTableName: true,
   },
-  keterangan: {
-    type: DataTypes.TEXT
-  },
-  fotografer: {
-    type: DataTypes.STRING
-  },
-}, {
-  sequelize,
-  modelName: 'tb_dokumentasi',
-  freezeTableName: true
+);
+
+tb_dokumentasi.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' });
+tb_kegiatan.hasMany(tb_dokumentasi, {
+  as: 'tb_dokumentasi',
+  foreignKey: 'id_kegiatan',
 });
 
-tb_dokumentasi.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' })
-tb_kegiatan.hasMany(tb_dokumentasi, { foreignKey: 'id_kegiatan' })
-
-module.exports = tb_dokumentasi
+module.exports = tb_dokumentasi;

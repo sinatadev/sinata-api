@@ -13,41 +13,52 @@ class tb_laymajalah extends Model {
     // define association here
   }
 }
-tb_laymajalah.init({
-  id: {
-    allowNull: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4
+tb_laymajalah.init(
+  {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    id_kegiatan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_kegiatan',
+        key: 'id',
+      },
+    },
+    bahan_publikasi: {
+      type: DataTypes.STRING,
+    },
+    status: {
+      type: DataTypes.ENUM(
+        'Pending',
+        'Approved & On Progress',
+        'Rejected',
+        'Complete',
+      ),
+      defaultValue: 'Pending',
+    },
+    disposisi: {
+      type: DataTypes.STRING,
+    },
+    luaran_layanan: {
+      type: DataTypes.STRING,
+    },
   },
-  id_kegiatan: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'tb_kegiatan',
-      key: 'id'
-    }
+  {
+    sequelize,
+    modelName: 'tb_laymajalah',
+    freezeTableName: true,
   },
-  bahan_publikasi: {
-    type: DataTypes.STRING
-  },
-  status: {
-    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
-    defaultValue: 'Pending',  
-  },
-  disposisi: {
-    type: DataTypes.STRING
-  },
-  luaran_layanan: {
-    type: DataTypes.STRING
-  },
-}, {
-  sequelize,
-  modelName: 'tb_laymajalah',
-  freezeTableName: true
-})
+);
 
-tb_laymajalah.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' })
-tb_kegiatan.hasMany(tb_laymajalah, { foreignKey: 'id_kegiatan' })
+tb_laymajalah.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' });
+tb_kegiatan.hasMany(tb_laymajalah, {
+  as: 'tb_laymajalah',
+  foreignKey: 'id_kegiatan',
+});
 
-module.exports = tb_laymajalah
+module.exports = tb_laymajalah;
