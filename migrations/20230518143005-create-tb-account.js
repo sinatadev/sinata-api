@@ -27,9 +27,6 @@ module.exports = {
       unit: {
         type: Sequelize.STRING,
       },
-      token: {
-        type: Sequelize.STRING,
-      },
       role: {
         type: Sequelize.ENUM(
           'User',
