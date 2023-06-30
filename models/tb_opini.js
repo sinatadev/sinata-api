@@ -46,7 +46,7 @@ tb_opini.init(
         'Pending',
         'Approved & On Progress',
         'Rejected',
-        'Complete',
+        'Completed',
       ),
       defaultValue: 'Pending',
     },

@@ -40,7 +40,7 @@ tb_laypubagenda.init(
         'Pending',
         'Approved & On Progress',
         'Rejected',
-        'Complete',
+        'Completed',
       ),
       defaultValue: 'Pending',
     },

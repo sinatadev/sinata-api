@@ -37,7 +37,7 @@ tb_laylivestr.init(
         'Pending',
         'Approved & On Progress',
         'Rejected',
-        'Complete',
+        'Completed',
       ),
       defaultValue: 'Pending',
     },

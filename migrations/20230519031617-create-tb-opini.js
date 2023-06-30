@@ -36,7 +36,7 @@ module.exports = {
             'Pending',
             'Approved & On Progress',
             'Rejected',
-            'Complete',
+            'Completed',
           ),
           defaultValue: 'Pending',
         },

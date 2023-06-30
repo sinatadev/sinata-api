@@ -43,7 +43,7 @@ tb_layvideotron.init(
         'Pending',
         'Approved & On Progress',
         'Rejected',
-        'Complete',
+        'Completed',
       ),
       defaultValue: 'Pending',
     },
