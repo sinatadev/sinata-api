@@ -8,7 +8,7 @@ module.exports = {
         ? req.headers.authorization.replace('Bearer ', '')
         : null;
       if (!token) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Maaf token tidak ditemukan.',
         });
       }
@@ -21,16 +21,16 @@ module.exports = {
       next();
     } catch (error) {
       if (error instanceof jwt.JsonWebTokenError) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Token tidak valid.',
         });
       }
       if (error instanceof jwt.TokenExpiredError) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Maaf sesi Anda telah habis, silakan login kembali.',
         });
       } else {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Akun Anda tidak diijinkan untuk mengakses halaman ini.',
         });
       }
@@ -42,7 +42,7 @@ module.exports = {
         ? req.headers.authorization.replace('Bearer ', '')
         : null;
       if (!token) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Maaf token tidak ditemukan.',
         });
       }
@@ -58,16 +58,16 @@ module.exports = {
       next();
     } catch (error) {
       if (error instanceof jwt.JsonWebTokenError) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Token tidak valid.',
         });
       }
       if (error instanceof jwt.TokenExpiredError) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Maaf sesi Anda telah habis, silakan login kembali.',
         });
       } else {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Akun Anda tidak diijinkan untuk mengakses halaman ini.',
         });
       }
@@ -79,7 +79,7 @@ module.exports = {
         ? req.headers.authorization.replace('Bearer ', '')
         : null;
       if (!token) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Maaf token tidak ditemukan.',
         });
       }
@@ -95,16 +95,16 @@ module.exports = {
       next();
     } catch (error) {
       if (error instanceof jwt.JsonWebTokenError) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Token tidak valid.',
         });
       }
       if (error instanceof jwt.TokenExpiredError) {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Maaf sesi Anda telah habis, silakan login kembali.',
         });
       } else {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Akun Anda tidak diijinkan untuk mengakses halaman ini.',
         });
       }
