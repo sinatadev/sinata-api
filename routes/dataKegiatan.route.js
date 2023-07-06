@@ -10,8 +10,8 @@ const {
 } = require('../controllers/dataKegiatan.controller');
 
 // admins
-router.get('/lihat', isLogin, viewDataKegiatan),
-  router.get('/:id/lihat', isLogin, viewDataKegiatan);
+router.get('/lihat', isLogin, viewDataKegiatan);
+router.get('/:id/lihat', isLogin, viewDataKegiatan);
 router.post('/tambah', isLogin, addDataKegiatan);
 router.put('/:id/edit', isLogin, editDataKegiatan);
 router.delete('/:id/delete', isLogin, deleteDataKegiatan);

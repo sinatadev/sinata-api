@@ -33,7 +33,7 @@ tb_arsip_pers.init(
       type: DataTypes.STRING,
     },
     judul_berita: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     kategori: {
       type: DataTypes.STRING,
@@ -57,10 +57,10 @@ tb_arsip_pers.init(
       type: DataTypes.STRING,
     },
     link_berita: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     judul_terjemahan: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     penerjemah: {
       type: DataTypes.STRING,
@@ -78,7 +78,7 @@ tb_arsip_pers.init(
       type: DataTypes.STRING,
     },
     link_terj: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     status_publikasi: {
       type: DataTypes.ENUM('ID', 'EN', 'Selesai'),

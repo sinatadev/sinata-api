@@ -51,7 +51,7 @@ module.exports = {
       });
 
       res.status(200).json({
-        message: `Berhasil menampilkan ${agenda.length} Agenda Terkini`,
+        message: `Berhasil menampilkan ${agenda.length} Layanan Publikasi Agenda`,
         page,
         totalPage,
         totalRow,
@@ -69,19 +69,18 @@ module.exports = {
     try {
       const agenda = await PublikasiAgendas.create(payload);
 
-      if (req.file) {
-        try {
-          agenda.leaflet_kegiatan = req.file.filename;
-        } catch (error) {
-          res.status(500).json({
-            message: error.message || 'Internal Server Error',
-          });
-        }
+      if (req.files.leaflet_kegiatan) {
+        const { leaflet_kegiatan } = req.files;
+        agenda.leaflet_kegiatan = leaflet_kegiatan[0].filename;
+      }
+      if (req.files.disposisi) {
+        const { disposisi } = req.files;
+        agenda.disposisi = disposisi[0].filename;
       }
       await agenda.save();
 
       res.status(201).json({
-        message: `Agenda baru berhasil ditambahkan.`,
+        message: `Layanan Publikasi Agenda berhasil ditambahkan.`,
         data: agenda,
       });
     } catch (error) {
@@ -98,22 +97,24 @@ module.exports = {
       if (agenda) {
         Object.assign(agenda, payload);
 
-        if (req.file) {
-          try {
-            if (agenda.leaflet_kegiatan) {
-              deleteFile(agenda.leaflet_kegiatan);
-            }
-            agenda.leaflet_kegiatan = req.file.filename;
-          } catch (error) {
-            res.status(500).json({
-              message: error.message || 'Internal Server Error',
-            });
+        if (req.files.leaflet_kegiatan) {
+          const { leaflet_kegiatan } = req.files;
+          if (agenda.leaflet_kegiatan) {
+            deleteFile(agenda.leaflet_kegiatan);
           }
+          agenda.leaflet_kegiatan = leaflet_kegiatan[0].filename;
+        }
+        if (req.files.disposisi) {
+          const { disposisi } = req.files;
+          if (agenda.disposisi) {
+            deleteFile(agenda.disposisi);
+          }
+          agenda.disposisi = disposisi[0].filename;
         }
         await agenda.save();
 
         res.status(200).json({
-          message: `Agenda berhasil diperbarui`,
+          message: `Layanan Publikasi Agenda berhasil diperbarui`,
           data: agenda,
         });
       } else {
@@ -138,12 +139,12 @@ module.exports = {
         await agenda.destroy();
 
         res.status(200).json({
-          message: `Agenda berhasil dihapus`,
+          message: `Layanan Publikasi Agenda berhasil dihapus`,
           data: agenda,
         });
       } else {
         res.status(404).json({
-          message: 'Agenda tidak ditemukan.',
+          message: 'Layanan Publikasi Agenda tidak ditemukan.',
         });
       }
     } catch (error) {
@@ -217,7 +218,7 @@ module.exports = {
       });
 
       res.status(200).json({
-        message: 'Berhasil menampilkan detail agenda.',
+        message: 'Berhasil menampilkan detail Layanan Publikasi Agenda.',
         data: modifiedAgenda,
       });
     } catch (error) {

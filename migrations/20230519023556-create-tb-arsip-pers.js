@@ -23,7 +23,7 @@ module.exports = {
           type: Sequelize.STRING,
         },
         judul_berita: {
-          type: Sequelize.STRING,
+          type: Sequelize.TEXT,
         },
         kategori: {
           type: Sequelize.STRING,
@@ -47,10 +47,10 @@ module.exports = {
           type: Sequelize.STRING,
         },
         link_berita: {
-          type: Sequelize.STRING,
+          type: Sequelize.TEXT,
         },
         judul_terjemahan: {
-          type: Sequelize.STRING,
+          type: Sequelize.TEXT,
         },
         penerjemah: {
           type: Sequelize.STRING,
@@ -68,7 +68,7 @@ module.exports = {
           type: Sequelize.STRING,
         },
         link_terj: {
-          type: Sequelize.STRING,
+          type: Sequelize.TEXT,
         },
         status_publikasi: {
           type: Sequelize.ENUM('ID', 'EN', 'Selesai'),
