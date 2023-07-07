@@ -136,6 +136,9 @@ module.exports = {
         if (agenda.leaflet_kegiatan) {
           deleteFile(agenda.leaflet_kegiatan);
         }
+        if (agenda.disposisi) {
+          deleteFile(agenda.disposisi);
+        }
         await agenda.destroy();
 
         res.status(200).json({
