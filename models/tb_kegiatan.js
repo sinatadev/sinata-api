@@ -13,52 +13,59 @@ class tb_kegiatan extends Model {
     // define association here
   }
 }
-tb_kegiatan.init({
-  id: {
-    allowNull: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4
+tb_kegiatan.init(
+  {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    id_account: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: tb_account,
+        key: 'id',
+      },
+    },
+    judul_kegiatan: {
+      type: DataTypes.STRING,
+    },
+    des_kegiatan: {
+      type: DataTypes.TEXT,
+    },
+    sifat_kegiatan: {
+      type: DataTypes.ENUM('Terbuka', 'Undangan'),
+      defaultValue: 'Terbuka',
+    },
+    tgl_kegiatan: {
+      type: DataTypes.DATE,
+    },
+    waktu_kegiatan: {
+      type: DataTypes.TIME,
+    },
+    tempat_kegiatan: {
+      type: DataTypes.STRING,
+    },
+    surat_permohonan: {
+      type: DataTypes.STRING,
+    },
+    sik: {
+      type: DataTypes.STRING,
+    },
   },
-  id_account: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: tb_account,
-      key: 'id'
-    }
+  {
+    sequelize,
+    modelName: 'tb_kegiatan',
+    freezeTableName: true,
   },
-  judul_kegiatan: {
-    type: DataTypes.STRING
-  },
-  des_kegiatan: {
-    type: DataTypes.TEXT
-  },
-  sifat_kegiatan: {
-    type: DataTypes.STRING
-  },
-  tgl_kegiatan: {
-    type: DataTypes.DATE
-  },
-  waktu_kegiatan: {
-    type: DataTypes.TIME
-  },
-  tempat_kegiatan: {
-    type: DataTypes.STRING
-  },
-  surat_permohonan: {
-    type: DataTypes.STRING
-  },
-  sik: {
-    type: DataTypes.STRING
-  }
-}, {
-  sequelize,
-  modelName: 'tb_kegiatan',
-  freezeTableName: true
-})
+);
 
-tb_kegiatan.belongsTo(tb_account, { foreignKey: 'id_account' })
-tb_account.hasMany(tb_kegiatan, { foreignKey: 'id_account' })
+tb_kegiatan.belongsTo(tb_account, { foreignKey: 'id_account' });
+tb_account.hasMany(tb_kegiatan, {
+  as: 'tb_kegiatan',
+  foreignKey: 'id_account',
+});
 
-module.exports = tb_kegiatan
+module.exports = tb_kegiatan;

@@ -13,47 +13,58 @@ class tb_arsipdesain extends Model {
     // define association here
   }
 }
-tb_arsipdesain.init({
-  id: {
-    allowNull: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4
+tb_arsipdesain.init(
+  {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    id_account: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_account',
+        key: 'id',
+      },
+    },
+    judul_desain: {
+      type: DataTypes.STRING,
+    },
+    kategori: {
+      type: DataTypes.STRING,
+    },
+    keterangan: {
+      type: DataTypes.TEXT,
+    },
+    deadline: {
+      type: DataTypes.DATE,
+    },
+    status: {
+      type: DataTypes.ENUM(
+        'Pending',
+        'Approved & On Progress',
+        'Rejected',
+        'Completed',
+      ),
+      defaultValue: 'Pending',
+    },
+    lampiran_file: {
+      type: DataTypes.STRING,
+    },
   },
-  id_account: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'tb_account',
-      key: 'id'
-    }
+  {
+    sequelize,
+    modelName: 'tb_arsipdesain',
+    freezeTableName: true,
   },
-  judul_desain: {
-    type: DataTypes.STRING
-  },
-  kategori: {
-    type: DataTypes.STRING
-  },
-  keterangan: {
-    type: DataTypes.TEXT
-  },
-  deadline: {
-    type: DataTypes.DATE
-  },
-  status: {
-    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
-    defaultValue: 'Pending',  
-  },
-  lampiran_file: {
-    type: DataTypes.STRING
-  },
-}, {
-  sequelize,
-  modelName: 'tb_arsipdesain',
-  freezeTableName: true
-})
+);
 
-tb_arsipdesain.belongsTo(tb_account, { foreignKey: 'id_account' })
-tb_account.hasMany(tb_arsipdesain, { foreignKey: 'id_account' })
+tb_arsipdesain.belongsTo(tb_account, { foreignKey: 'id_account' });
+tb_account.hasMany(tb_arsipdesain, {
+  as: 'tb_arsipdesain',
+  foreignKey: 'id_account',
+});
 
-module.exports = tb_arsipdesain
+module.exports = tb_arsipdesain;

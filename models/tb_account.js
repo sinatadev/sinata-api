@@ -38,9 +38,6 @@ tb_account.init(
     unit: {
       type: DataTypes.STRING,
     },
-    token: {
-      type: DataTypes.STRING,
-    },
     role: {
       type: DataTypes.ENUM(
         'User',

@@ -13,41 +13,52 @@ class tb_laylivestr extends Model {
     // define association here
   }
 }
-tb_laylivestr.init({
-  id: {
-    allowNull: false,
-    primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4
+tb_laylivestr.init(
+  {
+    id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+    },
+    id_kegiatan: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references: {
+        model: 'tb_kegiatan',
+        key: 'id',
+      },
+    },
+    thumbnail_kegiatan: {
+      type: DataTypes.STRING,
+    },
+    status: {
+      type: DataTypes.ENUM(
+        'Pending',
+        'Approved & On Progress',
+        'Rejected',
+        'Completed',
+      ),
+      defaultValue: 'Pending',
+    },
+    disposisi: {
+      type: DataTypes.STRING,
+    },
+    luaran_layanan: {
+      type: DataTypes.STRING,
+    },
   },
-  id_kegiatan: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    references: {
-      model: 'tb_kegiatan',
-      key: 'id'
-    }
+  {
+    sequelize,
+    modelName: 'tb_laylivestr',
+    freezeTableName: true,
   },
-  thumbnail_kegiatan: {
-    type: DataTypes.STRING
-  },
-  status: {
-    type: DataTypes.ENUM('Pending', 'Approved & On Progress', 'Rejected', 'Complete'),
-    defaultValue: 'Pending',  
-  },
-  disposisi: {
-    type: DataTypes.STRING
-  },
-  luaran_layanan: {
-    type: DataTypes.STRING
-  },
-}, {
-  sequelize,
-  modelName: 'tb_laylivestr',
-  freezeTableName: true
+);
+
+tb_laylivestr.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' });
+tb_kegiatan.hasMany(tb_laylivestr, {
+  as: 'tb_laylivestr',
+  foreignKey: 'id_kegiatan',
 });
 
-tb_laylivestr.belongsTo(tb_kegiatan, { foreignKey: 'id_kegiatan' })
-tb_kegiatan.hasMany(tb_laylivestr, { foreignKey: 'id_kegiatan' })
-
-module.exports = tb_laylivestr
+module.exports = tb_laylivestr;
