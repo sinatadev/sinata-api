@@ -89,6 +89,10 @@ module.exports = {
         const { disposisi } = req.files;
         majalah.disposisi = disposisi[0].filename;
       }
+      if (req.files.luaran_layanan) {
+        const { luaran_layanan } = req.files;
+        majalah.luaran_layanan = luaran_layanan[0].filename;
+      }
       await majalah.save();
 
       res.status(201).json({
@@ -122,6 +126,13 @@ module.exports = {
           }
           majalah.disposisi = disposisi[0].filename;
         }
+        if (req.files.luaran_layanan) {
+          const { luaran_layanan } = req.files;
+          if (majalah.luaran_layanan) {
+            deleteFile(majalah.luaran_layanan);
+          }
+          majalah.luaran_layanan = luaran_layanan[0].filename;
+        }
         await majalah.save();
 
         res.status(200).json({
@@ -149,6 +160,9 @@ module.exports = {
         }
         if (majalah.disposisi) {
           deleteFile(majalah.disposisi);
+        }
+        if (majalah.luaran_layanan) {
+          deleteFile(majalah.luaran_layanan);
         }
         await majalah.destroy();
 

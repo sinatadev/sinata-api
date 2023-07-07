@@ -1,9 +1,10 @@
 const Accounts = require('../models/tb_account');
 const Kegiatans = require('../models/tb_kegiatan');
+const deleteFile = require('../utils/deleteFIle.util');
 
 module.exports = {
   viewDataKegiatan: async (req, res) => {
-    const page = req.query.page || 1;
+    const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
     const offset = (page - 1) * limit;
     try {
@@ -20,7 +21,7 @@ module.exports = {
       });
       res.status(200).json({
         message: `Berhasil menampilkan ${kegiatan.length} data kegiatan tersimpan.`,
-        page,
+        page: page,
         totalPage,
         totalRow,
         rowsPerPage: limit,
@@ -58,6 +59,14 @@ module.exports = {
       const payload = req.body;
 
       const kegiatan = await Kegiatans.create(payload);
+      if (req.files.surat_permohonan) {
+        const { surat_permohonan } = req.files;
+        kegiatan.surat_permohonan = surat_permohonan[0].filename;
+      }
+      if (req.files.sik) {
+        const { sik } = req.files;
+        kegiatan.sik = sik[0].filename;
+      }
       await kegiatan.save();
 
       res.status(201).json({
@@ -77,10 +86,24 @@ module.exports = {
       const kegiatan = await Kegiatans.findByPk(id);
       if (kegiatan) {
         Object.assign(kegiatan, payload);
+        if (req.files.surat_permohonan) {
+          const { surat_permohonan } = req.files;
+          if (kegiatan.surat_permohonan) {
+            deleteFile(kegiatan.surat_permohonan);
+          }
+          kegiatan.surat_permohonan = surat_permohonan[0].filename;
+        }
+        if (req.files.sik) {
+          const { sik } = req.files;
+          if (kegiatan.sik) {
+            deleteFile(kegiatan.sik);
+          }
+          kegiatan.sik = sik[0].filename;
+        }
         await kegiatan.save();
 
         res.status(200).json({
-          message: `Kegiatan '${kegiatan.judul_kegiatan}' berhasil diperbarui`,
+          message: `Data berhasil diperbarui`,
           data: kegiatan,
         });
       } else {
@@ -100,6 +123,12 @@ module.exports = {
       const kegiatan = await Kegiatans.findByPk(id);
 
       if (kegiatan) {
+        if (kegiatan.surat_permohonan) {
+          deleteFile(kegiatan.surat_permohonan);
+        }
+        if (kegiatan.sik) {
+          deleteFile(kegiatan.sik);
+        }
         await kegiatan.destroy();
 
         res.status(200).json({

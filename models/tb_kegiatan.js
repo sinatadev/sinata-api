@@ -36,7 +36,8 @@ tb_kegiatan.init(
       type: DataTypes.TEXT,
     },
     sifat_kegiatan: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM('Terbuka', 'Undangan'),
+      defaultValue: 'Terbuka',
     },
     tgl_kegiatan: {
       type: DataTypes.DATE,

@@ -19,6 +19,7 @@ router.post(
   upload.fields([
     { name: 'bahan_publikasi', maxCount: 1 },
     { name: 'disposisi', maxCount: 1 },
+    { name: 'luaran_layanan', maxCount: 1 },
   ]),
   addMajalah,
 );
@@ -28,6 +29,7 @@ router.put(
   upload.fields([
     { name: 'bahan_publikasi', maxCount: 1 },
     { name: 'disposisi', maxCount: 1 },
+    { name: 'luaran_layanan', maxCount: 1 },
   ]),
   editMajalah,
 );

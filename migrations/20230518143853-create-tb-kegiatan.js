@@ -26,7 +26,8 @@ module.exports = {
           type: Sequelize.TEXT,
         },
         sifat_kegiatan: {
-          type: Sequelize.STRING,
+          type: Sequelize.ENUM('Terbuka', 'Undangan'),
+          defaultValue: 'Terbuka',
         },
         tgl_kegiatan: {
           type: Sequelize.DATE,
