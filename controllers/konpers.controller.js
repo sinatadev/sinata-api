@@ -4,7 +4,7 @@ const deleteFile = require('../utils/deleteFIle.util');
 
 module.exports = {
   viewKonpers: async (req, res) => {
-    const page = req.query.page || 1;
+    const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
     const offset = (page - 1) * limit;
     try {
