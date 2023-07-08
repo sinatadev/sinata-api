@@ -5,7 +5,7 @@ const deleteFile = require('../utils/deleteFIle.util');
 
 module.exports = {
   viewAgenda: async (req, res) => {
-    const page = req.query.page || 1;
+    const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
     const offset = (page - 1) * limit;
     const status = req.query.status || null;
@@ -157,7 +157,7 @@ module.exports = {
     }
   },
   viewKalenderData: async (req, res) => {
-    const page = req.query.page || 1;
+    const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;
     const offset = (page - 1) * limit;
     try {
@@ -167,6 +167,10 @@ module.exports = {
         include: {
           model: DataKegiatans,
           required: true,
+          include: {
+            model: Accounts,
+            required: true,
+          },
         },
         where: { status: 'Completed' },
         limit: limit,
@@ -179,9 +183,15 @@ module.exports = {
           id: item.id,
           title: item.tb_kegiatan.judul_kegiatan,
           date: item.tb_kegiatan.tgl_kegiatan,
+          time: item.tb_kegiatan.waktu_kegiatan,
+          tempat: item.tb_kegiatan.tempat_kegiatan,
           description: item.tb_kegiatan.des_kegiatan,
           image: item.leaflet_kegiatan,
           link: item.id,
+          sifat_acara: item.tb_kegiatan.sifat_kegiatan,
+          name: item.tb_kegiatan.tb_account.name,
+          img_profil: item.tb_kegiatan.tb_account.img_profil,
+          leaflet_kegiatan: item.leaflet_kegiatan,
         };
       });
 
