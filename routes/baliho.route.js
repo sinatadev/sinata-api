@@ -1,21 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
-const { isLoginSuperAdmin } = require('../middlewares/auth.middleware');
+const {
+  isLoginSuperAdmin,
+  isLogin,
+} = require('../middlewares/auth.middleware');
 const {
   viewBaliho,
   addBaliho,
   editBaliho,
   deleteBaliho,
   viewOneBaliho,
+  viewBalihoUser,
 } = require('../controllers/baliho.controller');
 const upload = require('../utils/upload.util');
 
 router.get('/lihat', isLoginSuperAdmin, viewBaliho);
-router.get('/:id/lihat', isLoginSuperAdmin, viewOneBaliho);
+router.get('/:id/lihat', isLogin, viewOneBaliho);
 router.post(
   '/tambah',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'bahan_publikasi', maxCount: 1 },
     { name: 'bukti_pembayaran', maxCount: 1 },
@@ -26,7 +30,7 @@ router.post(
 );
 router.put(
   '/:id/edit',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'bahan_publikasi', maxCount: 1 },
     { name: 'bukti_pembayaran', maxCount: 1 },
@@ -35,6 +39,7 @@ router.put(
   ]),
   editBaliho,
 );
-router.delete('/:id/delete', isLoginSuperAdmin, deleteBaliho);
+router.delete('/:id/delete', isLogin, deleteBaliho);
+router.get('/user/:id_account/lihat', isLogin, viewBalihoUser);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const Accounts = require('../models/tb_account');
 const deleteFile = require('../utils/deleteFIle.util');
-const { hashPassword } = require('../utils/password.util');
+const { hashPassword, compareSyncPassword } = require('../utils/password.util');
 const { Op } = require('sequelize');
 
 module.exports = {
@@ -174,6 +174,41 @@ module.exports = {
       res.status(200).json({
         message: `Berhasil mengubah avatar profil '${user.username}'.`,
       });
+    } catch (error) {
+      res.status(500).json({
+        message: error.message || 'Internal Server Error',
+      });
+    }
+  },
+  changePassword: async (req, res) => {
+    const { id } = req.params;
+    const { old_password, new_password, confirm_password } = req.body;
+    try {
+      const user = await Accounts.findByPk(id);
+      if (!user) {
+        res.status(404).json({
+          message: 'Akun tidak ditemukan.',
+        });
+      } else {
+        const isMatch = compareSyncPassword(old_password, user.password);
+        if (!isMatch) {
+          res.status(400).json({
+            message: 'Kata sandi lama tidak sesuai.',
+          });
+        } else if (new_password !== confirm_password) {
+          res.status(400).json({
+            message: 'Konfirmasi kata sandi baru tidak sesuai.',
+          });
+        } else {
+          const hashedPassword = await hashPassword(new_password);
+          user.password = hashedPassword;
+          await user.save();
+
+          res.status(200).json({
+            message: 'Kata sandi berhasil diubah.',
+          });
+        }
+      }
     } catch (error) {
       res.status(500).json({
         message: error.message || 'Internal Server Error',

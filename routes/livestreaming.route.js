@@ -1,21 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
-const { isLoginSuperAdmin } = require('../middlewares/auth.middleware');
+const {
+  isLoginSuperAdmin,
+  isLogin,
+} = require('../middlewares/auth.middleware');
 const {
   viewLiveStreaming,
   addLiveStreaming,
   editLiveStreaming,
   deleteLiveStreaming,
   viewOneLiveStreaming,
+  viewLiveStreamingUser,
 } = require('../controllers/livestreaming.controller');
 const upload = require('../utils/upload.util');
 
 router.get('/lihat', isLoginSuperAdmin, viewLiveStreaming);
-router.get('/:id/lihat', isLoginSuperAdmin, viewOneLiveStreaming);
+router.get('/:id/lihat', isLogin, viewOneLiveStreaming);
 router.post(
   '/tambah',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'thumbnail_kegiatan', maxCount: 1 },
     { name: 'disposisi', maxCount: 1 },
@@ -24,13 +28,14 @@ router.post(
 );
 router.put(
   '/:id/edit',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'thumbnail_kegiatan', maxCount: 1 },
     { name: 'disposisi', maxCount: 1 },
   ]),
   editLiveStreaming,
 );
-router.delete('/:id/delete', isLoginSuperAdmin, deleteLiveStreaming);
+router.delete('/:id/delete', isLogin, deleteLiveStreaming);
+router.get('/user/:id_account/lihat', isLogin, viewLiveStreamingUser);
 
 module.exports = router;

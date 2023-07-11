@@ -1,21 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
-const { isLoginSuperAdmin } = require('../middlewares/auth.middleware');
+const {
+  isLoginSuperAdmin,
+  isLogin,
+} = require('../middlewares/auth.middleware');
 const {
   viewPeminformasi,
   addPeminformasi,
   editPeminformasi,
   deletePemInformasi,
   viewOnePeminformasi,
+  viewPeminformasiUser,
 } = require('../controllers/peminformasi.controller');
 const upload = require('../utils/upload.util');
 
 router.get('/lihat', isLoginSuperAdmin, viewPeminformasi);
-router.get('/:id/lihat', isLoginSuperAdmin, viewOnePeminformasi);
+router.get('/:id/lihat', isLogin, viewOnePeminformasi);
 router.post(
   '/tambah',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'surat_permohonan', maxCount: 1 },
     { name: 'bahan_publikasi', maxCount: 1 },
@@ -25,7 +29,7 @@ router.post(
 );
 router.put(
   '/:id/edit',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'surat_permohonan', maxCount: 1 },
     { name: 'bahan_publikasi', maxCount: 1 },
@@ -33,6 +37,7 @@ router.put(
   ]),
   editPeminformasi,
 );
-router.delete('/:id/delete', isLoginSuperAdmin, deletePemInformasi);
+router.delete('/:id/delete', isLogin, deletePemInformasi);
+router.get('/user/:id_account/lihat', isLogin, viewPeminformasiUser);
 
 module.exports = router;
