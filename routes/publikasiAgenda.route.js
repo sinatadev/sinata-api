@@ -8,8 +8,12 @@ const {
   deleteAgenda,
   viewKalenderData,
   viewOneAgenda,
+  viewAgendaUser,
 } = require('../controllers/publikasiAgenda.controller');
-const { isLoginSuperAdmin } = require('../middlewares/auth.middleware');
+const {
+  isLoginSuperAdmin,
+  isLogin,
+} = require('../middlewares/auth.middleware');
 const upload = require('../utils/upload.util');
 
 router.get('/lihat', viewAgenda);
@@ -17,7 +21,7 @@ router.get('/:id/lihat', viewOneAgenda);
 router.get('/kalenderdata', viewKalenderData);
 router.post(
   '/tambah',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'leaflet_kegiatan', maxCount: 1 },
     { name: 'disposisi', maxCount: 1 },
@@ -26,13 +30,14 @@ router.post(
 );
 router.put(
   '/:id/edit',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'leaflet_kegiatan', maxCount: 1 },
     { name: 'disposisi', maxCount: 1 },
   ]),
   editAgenda,
 );
-router.delete('/:id/delete', isLoginSuperAdmin, deleteAgenda);
+router.delete('/:id/delete', isLogin, deleteAgenda);
+router.get('/user/:id_account/lihat', isLogin, viewAgendaUser);
 
 module.exports = router;

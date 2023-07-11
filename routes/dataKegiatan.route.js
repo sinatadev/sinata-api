@@ -7,6 +7,7 @@ const {
   addDataKegiatan,
   editDataKegiatan,
   deleteDataKegiatan,
+  viewDataKegiatanUser,
 } = require('../controllers/dataKegiatan.controller');
 const upload = require('../utils/upload.util');
 
@@ -34,5 +35,6 @@ router.put(
 router.delete('/:id/delete', isLogin, deleteDataKegiatan);
 
 // users
+router.get('/user/:id_account/lihat', isLogin, viewDataKegiatanUser);
 
 module.exports = router;

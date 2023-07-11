@@ -1,21 +1,25 @@
 var express = require('express');
 var router = express.Router();
 
-const { isLoginSuperAdmin } = require('../middlewares/auth.middleware');
+const {
+  isLoginSuperAdmin,
+  isLogin,
+} = require('../middlewares/auth.middleware');
 const {
   viewVideotron,
   addVideotron,
   editVideotron,
   deleteVideotron,
   viewOneVideotron,
+  viewVideotronUser,
 } = require('../controllers/videotron.controller');
 const upload = require('../utils/upload.util');
 
 router.get('/lihat', isLoginSuperAdmin, viewVideotron);
-router.get('/:id/lihat', isLoginSuperAdmin, viewOneVideotron);
+router.get('/:id/lihat', isLogin, viewOneVideotron);
 router.post(
   '/tambah',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'bahan_publikasi', maxCount: 1 },
     { name: 'disposisi', maxCount: 1 },
@@ -25,7 +29,7 @@ router.post(
 );
 router.put(
   '/:id/edit',
-  isLoginSuperAdmin,
+  isLogin,
   upload.fields([
     { name: 'bahan_publikasi', maxCount: 1 },
     { name: 'disposisi', maxCount: 1 },
@@ -33,6 +37,7 @@ router.put(
   ]),
   editVideotron,
 );
-router.delete('/:id/delete', isLoginSuperAdmin, deleteVideotron);
+router.delete('/:id/delete', isLogin, deleteVideotron);
+router.get('/user/:id_account/lihat', isLogin, viewVideotronUser);
 
 module.exports = router;
