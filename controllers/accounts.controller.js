@@ -164,11 +164,18 @@ module.exports = {
 		try {
 			const user = await Accounts.findByPk(id);
 			if (!user) {
-				res.status(404).json({
+				return res.status(404).json({
 					message: 'Akun tidak ditemukan.',
 				});
 			}
-			user.img_profil = req.file.filename;
+			// user.img_profil = req.files.img_profil;
+			if (req.files.img_profil) {
+				const { img_profil } = req.files;
+				if (user.img_profil && user.img_profil !== 'default.jpeg') {
+					deleteFile(user.img_profil);
+				}
+				user.img_profil = img_profil[0].filename;
+			}
 			await user.save();
 
 			res.status(200).json({
