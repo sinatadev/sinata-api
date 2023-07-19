@@ -22,8 +22,8 @@ router.put('/:id/edit', isLoginSuperAdmin, editUser);
 router.delete('/:id/delete', isLoginSuperAdmin, deleteUser);
 router.put(
 	'/:id/change-avatar',
-	isLoginSuperAdmin,
-	upload.single('img_profil'),
+	isLogin,
+	upload.fields([{ name: 'img_profil', maxCount: 1 }]),
 	changeAvatar,
 );
 router.put('/:id/change-profile', isLogin, changeProfile);
