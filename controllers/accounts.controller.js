@@ -8,13 +8,19 @@ module.exports = {
 		const page = parseInt(req.query.page) || 1;
 		const limit = parseInt(req.query.limit) || 5;
 		const offset = (page - 1) * limit;
+		const role = req.query.role || null;
 		try {
+			let where = {};
+			if (role) {
+				where = { role };
+			}
 			const totalRow = await Accounts.count();
 			const totalPage = Math.ceil(totalRow / limit);
 
 			const users = await Accounts.findAll({
 				offset: offset,
 				limit: limit,
+				where,
 				order: [['createdAt', 'DESC']],
 			});
 
