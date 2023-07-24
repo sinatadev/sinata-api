@@ -10,16 +10,13 @@ const {
 	changePassword,
 	changeProfile,
 } = require('../controllers/accounts.controller');
-const {
-	isLoginSuperAdmin,
-	isLogin,
-} = require('../middlewares/auth.middleware');
+const { isLoginAdmin, isLogin } = require('../middlewares/auth.middleware');
 const upload = require('../utils/upload.util');
 
-router.get('/lihat', isLoginSuperAdmin, viewUsers);
-router.post('/tambah', isLoginSuperAdmin, addUsers);
-router.put('/:id/edit', isLoginSuperAdmin, editUser);
-router.delete('/:id/delete', isLoginSuperAdmin, deleteUser);
+router.get('/lihat', isLoginAdmin, viewUsers);
+router.post('/tambah', isLoginAdmin, addUsers);
+router.put('/:id/edit', isLoginAdmin, editUser);
+router.delete('/:id/delete', isLoginAdmin, deleteUser);
 router.put(
 	'/:id/change-avatar',
 	isLogin,

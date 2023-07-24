@@ -10,10 +10,7 @@ const {
 	viewOneAgenda,
 	viewAgendaUser,
 } = require('../controllers/publikasiAgenda.controller');
-const {
-	isLoginSuperAdmin,
-	isLogin,
-} = require('../middlewares/auth.middleware');
+const { isLogin } = require('../middlewares/auth.middleware');
 const upload = require('../utils/upload.util');
 
 router.get('/lihat', viewAgenda);
