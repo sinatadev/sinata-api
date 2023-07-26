@@ -92,6 +92,10 @@ module.exports = {
 				const { leaflet_kegiatan } = req.files;
 				peliputan.leaflet_kegiatan = leaflet_kegiatan[0].filename;
 			}
+			if (req.files.bahan_publikasi) {
+				const { bahan_publikasi } = req.files;
+				peliputan.bahan_publikasi = bahan_publikasi[0].filename;
+			}
 			if (req.files.disposisi) {
 				const { disposisi } = req.files;
 				peliputan.disposisi = disposisi[0].filename;
@@ -121,6 +125,13 @@ module.exports = {
 						deleteFile(peliputan.leaflet_kegiatan);
 					}
 					peliputan.leaflet_kegiatan = leaflet_kegiatan[0].filename;
+				}
+				if (req.files.bahan_publikasi) {
+					const { bahan_publikasi } = req.files;
+					if (peliputan.bahan_publikasi) {
+						deleteFile(peliputan.bahan_publikasi);
+					}
+					peliputan.bahan_publikasi = bahan_publikasi[0].filename;
 				}
 				if (req.files.disposisi) {
 					const { disposisi } = req.files;
