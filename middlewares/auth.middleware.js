@@ -137,15 +137,58 @@ module.exports = {
 
 			const user = await Accounts.findOne({ where: { id: data.account.id } });
 			if (
-				user.role !== 'Super Admin' ||
-				user.role !== 'Admin Role 2' ||
-				user.role !== 'User'
+				data.account.role === 'User' ||
+				data.account.role === 'Super Admin' ||
+				data.account.role === 'Admin Role 2'
 			) {
+				req.user = user;
+				req.token = token;
+				next();
+			} else {
 				throw new Error();
 			}
-			req.user = user;
-			req.token = token;
-			next();
+		} catch (error) {
+			if (error instanceof jwt.JsonWebTokenError) {
+				return res.status(401).json({
+					message: 'Token tidak valid.',
+				});
+			}
+			if (error instanceof jwt.TokenExpiredError) {
+				return res.status(401).json({
+					message: 'Maaf sesi Anda telah habis, silakan login kembali.',
+				});
+			} else {
+				return res.status(401).json({
+					message: 'Akun Anda tidak diijinkan untuk mengakses halaman ini.',
+				});
+			}
+		}
+	},
+	isAuthArsipPers: async (req, res, next) => {
+		try {
+			const token = req.headers.authorization
+				? req.headers.authorization.replace('Bearer ', '')
+				: null;
+			if (!token) {
+				return res.status(401).json({
+					message: 'Maaf token tidak ditemukan.',
+				});
+			}
+
+			const data = jwt.verify(token, jwtKey);
+
+			const user = await Accounts.findOne({ where: { id: data.account.id } });
+			if (
+				user.role === 'Super Admin' ||
+				user.role === 'Admin Role 3' ||
+				user.role === 'Admin Role 9'
+			) {
+				req.user = user;
+				req.token = token;
+				next();
+			} else {
+				throw new Error();
+			}
 		} catch (error) {
 			if (error instanceof jwt.JsonWebTokenError) {
 				return res.status(401).json({

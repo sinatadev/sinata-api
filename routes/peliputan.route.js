@@ -23,6 +23,7 @@ router.post(
 	isAuthAddData,
 	upload.fields([
 		{ name: 'leaflet_kegiatan', maxCount: 1 },
+		{ name: 'bahan_publikasi', maxCount: 1 },
 		{ name: 'disposisi', maxCount: 1 },
 	]),
 	addPeliputan,
@@ -32,6 +33,7 @@ router.put(
 	isLogin,
 	upload.fields([
 		{ name: 'leaflet_kegiatan', maxCount: 1 },
+		{ name: 'bahan_publikasi', maxCount: 1 },
 		{ name: 'disposisi', maxCount: 1 },
 	]),
 	editPeliputan,
