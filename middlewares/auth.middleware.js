@@ -137,15 +137,16 @@ module.exports = {
 
 			const user = await Accounts.findOne({ where: { id: data.account.id } });
 			if (
-				user.role !== 'Super Admin' ||
-				user.role !== 'Admin Role 2' ||
-				user.role !== 'User'
+				data.account.role === 'User' ||
+				data.account.role === 'Super Admin' ||
+				data.account.role === 'Admin Role 2'
 			) {
+				req.user = user;
+				req.token = token;
+				next();
+			} else {
 				throw new Error();
 			}
-			req.user = user;
-			req.token = token;
-			next();
 		} catch (error) {
 			if (error instanceof jwt.JsonWebTokenError) {
 				return res.status(401).json({
@@ -178,15 +179,16 @@ module.exports = {
 
 			const user = await Accounts.findOne({ where: { id: data.account.id } });
 			if (
-				user.role !== 'Super Admin' ||
-				user.role !== 'Admin Role 3' ||
-				user.role !== 'Admin Role 9'
+				user.role === 'Super Admin' ||
+				user.role === 'Admin Role 3' ||
+				user.role === 'Admin Role 9'
 			) {
+				req.user = user;
+				req.token = token;
+				next();
+			} else {
 				throw new Error();
 			}
-			req.user = user;
-			req.token = token;
-			next();
 		} catch (error) {
 			if (error instanceof jwt.JsonWebTokenError) {
 				return res.status(401).json({
