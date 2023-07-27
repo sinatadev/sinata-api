@@ -12,7 +12,7 @@ const {
 const upload = require('../utils/upload.util');
 
 // admins
-router.get('/lihat', isLoginAdmin, viewDataKegiatan);
+router.get('/lihat', isLogin, viewDataKegiatan);
 router.get('/:id/lihat', isLogin, viewDataKegiatan);
 router.post(
 	'/tambah',
