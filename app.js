@@ -84,4 +84,4 @@ sinata.listen(port, () => {
 	);
 });
 
-exports.app = functions.https.onRequest(sinata);
+exports.sinata = functions.https.onRequest(sinata);
