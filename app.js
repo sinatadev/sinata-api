@@ -6,6 +6,7 @@ var cors = require('cors');
 
 // Import the functions you need from the SDKs you need
 const { initializeApp } = require('firebase/app');
+const functions = require('firebase-functions');
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -82,3 +83,5 @@ sinata.listen(port, () => {
 		`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`,
 	);
 });
+
+exports.app = functions.https.onRequest(sinata);
