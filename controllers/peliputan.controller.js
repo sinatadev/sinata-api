@@ -2,30 +2,44 @@ const Peliputans = require('../models/tb_laypeliputan');
 const DataKegiatans = require('../models/tb_kegiatan');
 const Accounts = require('../models/tb_account');
 const deleteFile = require('../utils/deleteFIle.util');
+const { Op } = require('sequelize');
 
 module.exports = {
 	viewPeliputan: async (req, res) => {
 		const page = parseInt(req.query.page) || 1;
 		const limit = parseInt(req.query.limit) || 5;
 		const offset = (page - 1) * limit;
-		const tgl_kegiatan = req.query.tgl || null;
+		const { tgl_kegiatan, status, user } = req.query || null;
 		try {
-			let where = {};
+			let tgl = {};
 			if (tgl_kegiatan) {
-				where = { tgl_kegiatan };
+				tgl = { tgl_kegiatan };
 			}
-
+			let status_layanan = {};
+			if (status) {
+				status_layanan = { status };
+			}
+			let pic = {};
+			if (user) {
+				pic = { pic: user };
+			}
 			const totalRow = await Peliputans.count();
 			const totalPage = Math.ceil(totalRow / limit);
 			const peliputan = await Peliputans.findAll({
 				include: {
 					model: DataKegiatans,
 					required: true,
-					where,
+					where: tgl,
 					include: {
 						model: Accounts,
 						required: true,
 					},
+				},
+				where: {
+					[Op.and]: [
+						status_layanan,
+						user ? { pic: { [Op.like]: `%${user}%` } } : {},
+					].filter(Boolean),
 				},
 				limit,
 				offset,
