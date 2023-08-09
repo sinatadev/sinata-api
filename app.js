@@ -5,7 +5,7 @@ var sequelize = require('./config/connection');
 var cors = require('cors');
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
+const { initializeApp } = require('firebase/app');
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,15 +40,15 @@ const dokumentasiRouter = require('./routes/dokumentasi.route');
 const filedocRouter = require('./routes/filedoc.route');
 const pengumumanRouter = require('./routes/pengumuman.route');
 
-const express = express();
+const sinata = express();
 const port = process.env.PORT || 3030;
 const URL = '/api/v1';
 
-express.use(cors());
-express.use(express.json());
-express.use(express.urlencoded({ extended: false }));
+sinata.use(cors());
+sinata.use(express.json());
+sinata.use(express.urlencoded({ extended: false }));
 
-express.get('/', async (req, res) => {
+sinata.get('/', async (req, res) => {
 	try {
 		await sequelize.authenticate();
 		res
@@ -58,26 +58,26 @@ express.get('/', async (req, res) => {
 		res.status(500).json('Unable to connect to the database: ' + error.message);
 	}
 });
-express.use('/uploads', express.static('uploads'));
-express.use(`${URL}/auth`, authRouter);
-express.use(`${URL}/users`, accountsRouter);
-express.use(`${URL}/data-kegiatan`, dataKegiatanRouter);
-express.use(`${URL}/publikasi-agenda`, publikasiAgendaRouter);
-express.use(`${URL}/konpers`, konpersRouter);
-express.use(`${URL}/pembaruan-informasi`, peminformasiRouter);
-express.use(`${URL}/arsip-desain`, arsipDesainRouter);
-express.use(`${URL}/opini`, opiniRouter);
-express.use(`${URL}/baliho`, balihoRouter);
-express.use(`${URL}/videotron`, videotronRouter);
-express.use(`${URL}/live-streaming`, liveStreamingRouter);
-express.use(`${URL}/majalah`, majalahRouter);
-express.use(`${URL}/peliputan`, peliputanRouter);
-express.use(`${URL}/arsip-pers`, arsipPersRouter);
-express.use(`${URL}/dokumentasi`, dokumentasiRouter);
-express.use(`${URL}/file-doc`, filedocRouter);
-express.use(`${URL}/pengumuman`, pengumumanRouter);
+sinata.use('/uploads', express.static('uploads'));
+sinata.use(`${URL}/auth`, authRouter);
+sinata.use(`${URL}/users`, accountsRouter);
+sinata.use(`${URL}/data-kegiatan`, dataKegiatanRouter);
+sinata.use(`${URL}/publikasi-agenda`, publikasiAgendaRouter);
+sinata.use(`${URL}/konpers`, konpersRouter);
+sinata.use(`${URL}/pembaruan-informasi`, peminformasiRouter);
+sinata.use(`${URL}/arsip-desain`, arsipDesainRouter);
+sinata.use(`${URL}/opini`, opiniRouter);
+sinata.use(`${URL}/baliho`, balihoRouter);
+sinata.use(`${URL}/videotron`, videotronRouter);
+sinata.use(`${URL}/live-streaming`, liveStreamingRouter);
+sinata.use(`${URL}/majalah`, majalahRouter);
+sinata.use(`${URL}/peliputan`, peliputanRouter);
+sinata.use(`${URL}/arsip-pers`, arsipPersRouter);
+sinata.use(`${URL}/dokumentasi`, dokumentasiRouter);
+sinata.use(`${URL}/file-doc`, filedocRouter);
+sinata.use(`${URL}/pengumuman`, pengumumanRouter);
 
-express.listen(port, () => {
+sinata.listen(port, () => {
 	console.log(
 		`\nSistem Informasi Manajemen Pelayanan dan Berita API's \nSuccessfully listening the app on http://localhost:${port}`,
 	);
