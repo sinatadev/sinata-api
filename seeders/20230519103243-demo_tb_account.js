@@ -14,7 +14,7 @@ async function generateAccountData() {
       password: '$2a$16$3Zt9NiiHUWjl8xjNwTpjOuCTpBonbhXg.jGlqgQTYr5NWfvssy3je', // => password
       no_identitas: '33311237677512',
       unit: 'UPT Humas dan Media',
-      id_role: 1,
+      id_role: 3,
       kontak: '08888888888',
       img_profil: 'default.jpeg',
       createdAt: now,
@@ -28,7 +28,7 @@ async function generateAccountData() {
       password: '$2a$16$3Zt9NiiHUWjl8xjNwTpjOuCTpBonbhXg.jGlqgQTYr5NWfvssy3je', // => password
       no_identitas: 'M3119016',
       unit: 'Sekolah Vokasi UNS',
-      id_role: 2,
+      id_role: 1,
       kontak: '085123777786126',
       img_profil: 'default.jpeg',
       createdAt: now,
