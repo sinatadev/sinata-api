@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tb_navigation_assignments', {
+    await queryInterface.createTable('tb_navigation_assignment', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,7 +12,7 @@ module.exports = {
       id_navigation: {
         type: Sequelize.INTEGER
       },
-      roleId: {
+      id_role: {
         type: Sequelize.INTEGER
       },
       createdBy: {
@@ -35,6 +35,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tb_navigation_assignments');
+    await queryInterface.dropTable('tb_navigation_assignment');
   }
 };

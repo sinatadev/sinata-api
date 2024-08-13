@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.NUMBER
     },
-    navigationId: DataTypes.NUMBER,
-    roleId: DataTypes.NUMBER,
+    id_navigation: DataTypes.NUMBER,
+    id_role: DataTypes.NUMBER,
     createdBy: DataTypes.NUMBER,
     updatedBy: DataTypes.NUMBER,
     is_active: DataTypes.BOOLEAN

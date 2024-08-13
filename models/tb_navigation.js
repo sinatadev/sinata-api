@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.NUMBER
     },
-    parentMenuId: DataTypes.NUMBER,
+    id_parent_menu: DataTypes.NUMBER,
     type: DataTypes.NUMBER,
     name: DataTypes.STRING,
     route: DataTypes.STRING,

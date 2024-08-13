@@ -21,7 +21,7 @@ module.exports = {
       route: {
         type: Sequelize.STRING
       },
-      order_by: {
+      orderBy: {
         type: Sequelize.INTEGER
       },
       icon: {
