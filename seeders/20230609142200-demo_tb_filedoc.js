@@ -7,8 +7,8 @@ const now = new Date()
 async function generateFileDokumentasi() {
   const files = [
     {
-      id: '97habz21-c313-441a-af4f-v8122e898vz4',
-      id_dokumentasi: '5gba612h-c313-441a-af4f-b2932e87bha5',
+      id: 1,
+      id_dokumentasi: 1,
       nama_file: 'file-1.jpg',
       tipe_file: 'jpg',
       size_file: 528,
@@ -16,8 +16,8 @@ async function generateFileDokumentasi() {
       updatedAt: now
     },
     {
-      id: '2hbayk73-c313-441a-af4f-v8122e98bh16',
-      id_dokumentasi: '5gba612h-c313-441a-af4f-b2932e87bha5',
+      id: 2,
+      id_dokumentasi: 1,
       nama_file: 'file-2.jpg',
       tipe_file: 'jpg',
       size_file: 321,

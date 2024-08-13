@@ -15,9 +15,9 @@ class tb_pengumuman extends Model {
 tb_pengumuman.init({
   id: {
     allowNull: false,
+    autoIncrement: true,
     primaryKey: true,
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4
+    type: DataTypes.NUMBER
   },
   judul_pengumuman: {
     type: DataTypes.STRING
@@ -28,9 +28,9 @@ tb_pengumuman.init({
   content: {
     type: DataTypes.TEXT
   },
-  status: {
-    type: DataTypes.ENUM('Active', 'Inactive'),
-    defaultValue: 'Active'
+  is_active: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true
   }
 }, {
   sequelize,

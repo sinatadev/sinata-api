@@ -7,12 +7,12 @@ module.exports = {
 			{
 				id: {
 					allowNull: false,
+					autoIncrement: true,
 					primaryKey: true,
-					type: Sequelize.UUID,
-					defaultValue: Sequelize.UUIDV4,
+					type: Sequelize.INTEGER
 				},
 				id_peliputan: {
-					type: Sequelize.UUID,
+					type: Sequelize.INTEGER,
 					allowNull: false,
 					references: {
 						model: 'tb_laypeliputan',
@@ -79,7 +79,7 @@ module.exports = {
 					type: Sequelize.DATE,
 				},
 				updatedAt: {
-					allowNull: false,
+					allowNull: true,
 					type: Sequelize.DATE,
 				},
 			},

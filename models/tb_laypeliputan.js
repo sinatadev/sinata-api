@@ -17,12 +17,12 @@ tb_laypeliputan.init(
 	{
 		id: {
 			allowNull: false,
+			autoIncrement: true,
 			primaryKey: true,
-			type: DataTypes.UUID,
-			defaultValue: DataTypes.UUIDV4,
+			type: DataTypes.NUMBER
 		},
 		id_kegiatan: {
-			type: DataTypes.UUID,
+			type: DataTypes.NUMBER,
 			allowNull: false,
 			references: {
 				model: 'tb_kegiatan',
@@ -35,14 +35,9 @@ tb_laypeliputan.init(
 		bahan_publikasi: {
 			type: DataTypes.STRING,
 		},
-		status: {
-			type: DataTypes.ENUM(
-				'Pending',
-				'Approved & On Progress',
-				'Rejected',
-				'Completed',
-			),
-			defaultValue: 'Pending',
+		id_status: {
+			type: DataTypes.NUMBER,
+			defaultValue: 1,
 		},
 		disposisi: {
 			type: DataTypes.STRING,

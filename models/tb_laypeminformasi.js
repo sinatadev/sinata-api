@@ -15,14 +15,14 @@ class tb_laypeminformasi extends Model {
 }
 tb_laypeminformasi.init(
   {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-    },
+      id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: DataTypes.NUMBER
+      },
     id_account: {
-      type: DataTypes.UUID,
+      type: DataTypes.NUMBER,
       allowNull: false,
       references: {
         model: 'tb_account',
@@ -38,15 +38,10 @@ tb_laypeminformasi.init(
     bahan_publikasi: {
       type: DataTypes.STRING,
     },
-    status: {
-      type: DataTypes.ENUM(
-        'Pending',
-        'Approved & On Progress',
-        'Rejected',
-        'Completed',
-      ),
-      defaultValue: 'Pending',
-    },
+      id_status: {
+          type: DataTypes.NUMBER,
+          defaultValue: 1,
+      },
     disposisi: {
       type: DataTypes.STRING,
     },

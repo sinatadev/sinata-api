@@ -1,18 +1,19 @@
 'use strict';
+const {DataTypes} = require("sequelize");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable(
       'tb_laykonpers',
       {
-        id: {
-          allowNull: false,
-          primaryKey: true,
-          type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4,
-        },
+          id: {
+              allowNull: false,
+              autoIncrement: true,
+              primaryKey: true,
+              type: Sequelize.INTEGER
+          },
         id_account: {
-          type: Sequelize.UUID,
+          type: Sequelize.INTEGER,
           allowNull: false,
           references: {
             model: 'tb_account',
@@ -37,15 +38,10 @@ module.exports = {
         tempat_kegiatan: {
           type: Sequelize.STRING,
         },
-        status: {
-          type: Sequelize.ENUM(
-            'Pending',
-            'Approved & On Progress',
-            'Rejected',
-            'Completed',
-          ),
-          defaultValue: 'Pending',
-        },
+          id_status: {
+              type: Sequelize.INTEGER,
+              defaultValue: 1,
+          },
         disposisi: {
           type: Sequelize.STRING,
         },
@@ -54,7 +50,7 @@ module.exports = {
           type: Sequelize.DATE,
         },
         updatedAt: {
-          allowNull: false,
+          allowNull: true,
           type: Sequelize.DATE,
         },
       },

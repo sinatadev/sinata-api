@@ -16,9 +16,9 @@ tb_account.init(
   {
     id: {
       allowNull: false,
+      autoIncrement: true,
       primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.NUMBER
     },
     username: {
       type: DataTypes.STRING,
@@ -38,21 +38,9 @@ tb_account.init(
     unit: {
       type: DataTypes.STRING,
     },
-    role: {
-      type: DataTypes.ENUM(
-        'User',
-        'Super Admin',
-        'Admin Role 1',
-        'Admin Role 2',
-        'Admin Role 3',
-        'Admin Role 4',
-        'Admin Role 5',
-        'Admin Role 6',
-        'Admin Role 7',
-        'Admin Role 8',
-        'Admin Role 9',
-      ),
-      defaultValue: 'User',
+    id_role: {
+      type: DataTypes.NUMBER,
+      defaultValue: 1,
     },
     kontak: {
       type: DataTypes.STRING,

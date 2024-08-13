@@ -7,14 +7,14 @@ const now = new Date();
 async function generateOpiniData() {
   const opini = [
     {
-      id: '7hb9kma6-c313-441a-af4f-b2932e2876ba',
-      id_account: '326d958b-c313-441a-af4f-b2932e2b52ed',
+      id: 1,
+      id_account: 2,
       judul_pembahasan:
         'Resolusi PPDB SMA 2023 Berdasar Keberpihakan pada Siswa',
       surat_permohonan: 'surat-permohonan-a.pdf',
       foto_penulis: 'foto-penulis-a.jpg',
       bahan_publikasi: 'bahan-publikasi-a.pdf',
-      status: 'Completed',
+      id_status: 4,
       disposisi: 'disposisi-a.pdf',
       tgl_waktu_upload: '2022-07-04 14:58:12',
       admin: 'Super Admin',

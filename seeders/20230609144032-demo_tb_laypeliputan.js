@@ -7,10 +7,10 @@ const now = new Date();
 async function generateLayananPeliputanData() {
   const peliputans = [
     {
-      id: '871bat65-8714-44e0-a2fe-45b233f8hb67',
-      id_kegiatan: '3dd49c97-8714-44e0-a2fe-45b233f623f5',
+      id: 1,
+      id_kegiatan: 1,
       leaflet_kegiatan: 'leaflet-a.jpg',
-      status: 'Completed',
+      id_status: 4,
       disposisi: 'disposisi-a.pdf',
       keterangan: 'Keterangan tambahan',
       createdAt: now,

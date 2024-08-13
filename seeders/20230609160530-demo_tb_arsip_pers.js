@@ -7,8 +7,8 @@ const now = new Date();
 async function generateArsipPers() {
   const arsipPers = [
     {
-      id: '32bhytg6-8714-44e0-a2fe-45b233fj76gb',
-      id_peliputan: '871bat65-8714-44e0-a2fe-45b233f8hb67',
+      id: 1,
+      id_peliputan: 1,
       no_rilis: '10/HUMAS/UNS/VII/2022',
       judul_berita:
         'Prodi PPKn UNS Gelar Seminar Nasional Bahas Pendidikan Kewarganegaraan untuk Penguatan Karakter Bangsa',

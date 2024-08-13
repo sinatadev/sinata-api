@@ -17,12 +17,12 @@ tb_arsip_pers.init(
 	{
 		id: {
 			allowNull: false,
+			autoIncrement: true,
 			primaryKey: true,
-			type: DataTypes.UUID,
-			defaultValue: DataTypes.UUIDV4,
+			type: DataTypes.NUMBER
 		},
 		id_peliputan: {
-			type: DataTypes.UUID,
+			type: DataTypes.NUMBER,
 			allowNull: false,
 			references: {
 				model: 'tb_laypeliputan',

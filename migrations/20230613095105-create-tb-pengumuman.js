@@ -5,12 +5,12 @@ module.exports = {
     await queryInterface.createTable(
       'tb_pengumuman',
       {
-        id: {
-          allowNull: false,
-          primaryKey: true,
-          type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4,
-        },
+          id: {
+              allowNull: false,
+              autoIncrement: true,
+              primaryKey: true,
+              type: Sequelize.INTEGER
+          },
         judul_pengumuman: {
           type: Sequelize.STRING,
         },
@@ -20,16 +20,16 @@ module.exports = {
         content: {
           type: Sequelize.TEXT,
         },
-        status: {
-          type: Sequelize.ENUM('Active', 'Inactive'),
-          defaultValue: 'Active',
+        is_active: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: true,
         },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,
         },
         updatedAt: {
-          allowNull: false,
+          allowNull: true,
           type: Sequelize.DATE,
         },
       },

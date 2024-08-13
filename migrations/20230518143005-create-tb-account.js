@@ -5,12 +5,12 @@ module.exports = {
     await queryInterface.createTable(
       'tb_account',
       {
-        id: {
-          allowNull: false,
-          primaryKey: true,
-          type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4,
-        },
+          id: {
+              allowNull: false,
+              autoIncrement: true,
+              primaryKey: true,
+              type: Sequelize.INTEGER
+          },
         username: {
           type: Sequelize.STRING,
         },
@@ -29,21 +29,9 @@ module.exports = {
         unit: {
           type: Sequelize.STRING,
         },
-        role: {
-          type: Sequelize.ENUM(
-            'User',
-            'Super Admin',
-            'Admin Role 1',
-            'Admin Role 2',
-            'Admin Role 3',
-            'Admin Role 4',
-            'Admin Role 5',
-            'Admin Role 6',
-            'Admin Role 7',
-            'Admin Role 8',
-            'Admin Role 9',
-          ),
-          defaultValue: 'User',
+        id_role: {
+          type: Sequelize.INTEGER,
+          defaultValue: 1,
         },
         kontak: {
           type: Sequelize.STRING,
@@ -57,7 +45,7 @@ module.exports = {
           type: Sequelize.DATE,
         },
         updatedAt: {
-          allowNull: false,
+          allowNull: true,
           type: Sequelize.DATE,
         },
       },

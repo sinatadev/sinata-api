@@ -15,14 +15,14 @@ class tb_kegiatan extends Model {
 }
 tb_kegiatan.init(
   {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-    },
+      id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: DataTypes.NUMBER
+      },
     id_account: {
-      type: DataTypes.UUID,
+      type: DataTypes.NUMBER,
       allowNull: false,
       references: {
         model: tb_account,

@@ -7,12 +7,12 @@ const now = new Date()
 async function generateLayananPembaruanInformasi() {
   const laypeminformasi = [
     {
-      id: '41bs551h-8714-44e0-a2fe-45b233f716hb',
-      id_account: '326d958b-c313-441a-af4f-b2932e2b52ed',
+      id: 1,
+      id_account: 2,
       judul_permohonan: 'Permohonan Pembaruan Informasi UNS Press di Laman UNS https://uns.ac.id/',
       surat_permohonan: 'surat-permohonan-a.pdf',
       bahan_publikasi: 'bahan-publikasi-a.pdf',
-      status: 'Approved & On Progress',
+      id_status: 2,
       disposisi: 'disposisi-a.pdf',
       luaran_layanan: '',
       createdAt: now,

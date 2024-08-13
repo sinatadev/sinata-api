@@ -15,14 +15,14 @@ class tb_laykonpers extends Model {
 }
 tb_laykonpers.init(
   {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-    },
+      id: {
+          allowNull: false,
+          autoIncrement: true,
+          primaryKey: true,
+          type: DataTypes.NUMBER
+      },
     id_account: {
-      type: DataTypes.UUID,
+      type: DataTypes.NUMBER,
       allowNull: false,
       references: {
         model: 'tb_account',
@@ -47,14 +47,9 @@ tb_laykonpers.init(
     tempat_kegiatan: {
       type: DataTypes.STRING,
     },
-    status: {
-      type: DataTypes.ENUM(
-        'Pending',
-        'Approved & On Progress',
-        'Rejected',
-        'Completed',
-      ),
-      defaultValue: 'Pending',
+    id_status: {
+      type: DataTypes.NUMBER,
+      defaultValue: 1,
     },
     disposisi: {
       type: DataTypes.STRING,

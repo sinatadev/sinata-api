@@ -5,14 +5,14 @@ module.exports = {
     await queryInterface.createTable(
       'tb_dokumentasi',
       {
-        id: {
-          allowNull: false,
-          primaryKey: true,
-          type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4,
-        },
+          id: {
+              allowNull: false,
+              autoIncrement: true,
+              primaryKey: true,
+              type: Sequelize.INTEGER
+          },
         id_kegiatan: {
-          type: Sequelize.UUID,
+          type: Sequelize.INTEGER,
           allowNull: false,
           references: {
             model: 'tb_kegiatan',
@@ -30,7 +30,7 @@ module.exports = {
           type: Sequelize.DATE,
         },
         updatedAt: {
-          allowNull: false,
+          allowNull: true,
           type: Sequelize.DATE,
         },
       },
