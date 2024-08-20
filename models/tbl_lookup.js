@@ -1,9 +1,9 @@
 'use strict';
 const {
-  Model, DataTypes
+  Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class tb_lookup extends Model {
+  class tbl_lookup extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,23 +13,17 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  tb_lookup.init({
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.NUMBER
-    },
+  tbl_lookup.init({
     type: DataTypes.STRING,
     name: DataTypes.STRING,
-    value: DataTypes.NUMBER,
+    value: DataTypes.INTEGER,
     description: DataTypes.STRING,
-    createdBy: DataTypes.NUMBER,
-    updatedBy: DataTypes.NUMBER,
-    is_active: DataTypes.BOOLEAN
+    createdBy: DataTypes.INTEGER,
+    updatedBy: DataTypes.INTEGER,
+    isActive: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'tb_lookup',
+    modelName: 'tbl_lookup',
   });
-  return tb_lookup;
+  return tbl_lookup;
 };

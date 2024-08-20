@@ -2,23 +2,23 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tb_lookup', {
+    await queryInterface.createTable('tbl_filedocs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      type: {
-        type: Sequelize.STRING
+      serviceId: {
+        type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING
       },
-      value: {
-        type: Sequelize.INTEGER
+      type: {
+        type: Sequelize.STRING
       },
-      description: {
+      size: {
         type: Sequelize.STRING
       },
       createdBy: {
@@ -27,20 +27,17 @@ module.exports = {
       updatedBy: {
         type: Sequelize.INTEGER
       },
-      is_active: {
-        type: Sequelize.BOOLEAN
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tb_lookup');
+    await queryInterface.dropTable('tbl_filedocs');
   }
 };

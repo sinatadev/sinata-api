@@ -1,9 +1,9 @@
 'use strict';
 const {
-  Model, DataTypes
+  Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class tb_navigation extends Model {
+  class tbl_navigation extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,25 +13,19 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  tb_navigation.init({
-    id: {
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-      type: DataTypes.NUMBER
-    },
-    id_parent_menu: DataTypes.NUMBER,
-    type: DataTypes.NUMBER,
+  tbl_navigation.init({
+    parentMenuId: DataTypes.INTEGER,
+    type: DataTypes.INTEGER,
     name: DataTypes.STRING,
     route: DataTypes.STRING,
-    orderBy: DataTypes.NUMBER,
+    orderBy: DataTypes.INTEGER,
     icon: DataTypes.STRING,
-    createdBy: DataTypes.NUMBER,
-    updatedBy: DataTypes.NUMBER,
-    is_active: DataTypes.BOOLEAN
+    createdBy: DataTypes.INTEGER,
+    updatedBy: DataTypes.INTEGER,
+    isActive: DataTypes.BOOLEAN
   }, {
     sequelize,
-    modelName: 'tb_navigation',
+    modelName: 'tbl_navigation',
   });
-  return tb_navigation;
+  return tbl_navigation;
 };

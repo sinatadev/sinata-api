@@ -2,18 +2,21 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tb_navigation_assignment', {
+    await queryInterface.createTable('tbl_announcements', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      id_navigation: {
-        type: Sequelize.INTEGER
+      title: {
+        type: Sequelize.STRING
       },
-      id_role: {
-        type: Sequelize.INTEGER
+      uploadedAt: {
+        type: Sequelize.DATE
+      },
+      content: {
+        type: Sequelize.TEXT
       },
       createdBy: {
         type: Sequelize.INTEGER
@@ -21,20 +24,17 @@ module.exports = {
       updatedBy: {
         type: Sequelize.INTEGER
       },
-      is_active: {
-        type: Sequelize.BOOLEAN
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: true,
+        allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tb_navigation_assignment');
+    await queryInterface.dropTable('tbl_announcements');
   }
 };
