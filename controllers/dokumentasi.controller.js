@@ -1,7 +1,7 @@
-const Dokumentasis = require('../models/tb_dokumentasi')
-const Filedocs = require('../models/tb_filedoc')
-const DataKegiatans = require('../models/tb_kegiatan')
-const Accounts = require('../models/tb_account')
+// const Dokumentasis = require('../models/tb_dokumentasi')
+// const Filedocs = require('../models/tb_filedoc')
+// const DataKegiatans = require('../models/tb_kegiatan')
+// const Accounts = require('../models/tb_account')
 const deleteFileDokumentasi = require('../utils/deleteFileDokumentasi.util')
 
 module.exports = {

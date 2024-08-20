@@ -1,5 +1,5 @@
-const Konpers = require('../models/tb_laykonpers');
-const Accounts = require('../models/tb_account');
+// const Konpers = require('../models/tb_laykonpers');
+// const Accounts = require('../models/tb_account');
 const deleteFile = require('../utils/deleteFIle.util');
 
 module.exports = {

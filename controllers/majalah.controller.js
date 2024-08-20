@@ -1,6 +1,6 @@
-const Majalahs = require('../models/tb_laymajalah');
-const DataKegiatans = require('../models/tb_kegiatan');
-const Accounts = require('../models/tb_account');
+// const Majalahs = require('../models/tb_laymajalah');
+// const DataKegiatans = require('../models/tb_kegiatan');
+// const Accounts = require('../models/tb_account');
 const deleteFile = require('../utils/deleteFIle.util');
 
 module.exports = {

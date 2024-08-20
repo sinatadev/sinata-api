@@ -1,4 +1,4 @@
-const Pengumumans = require('../models/tb_pengumuman')
+// const Pengumumans = require('../models/tb_pengumuman')
 
 module.exports = {
     viewPengumuman: async (req, res) => {

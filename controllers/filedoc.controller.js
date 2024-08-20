@@ -1,5 +1,5 @@
-const Dokumentasis = require('../models/tb_dokumentasi')
-const Filedocs = require('../models/tb_filedoc')
+// const Dokumentasis = require('../models/tb_dokumentasi')
+// const Filedocs = require('../models/tb_filedoc')
 const deleteFileDokumentasi = require('../utils/deleteFileDokumentasi.util')
 
 module.exports = {

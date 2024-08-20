@@ -1,4 +1,5 @@
-const Accounts = require('../models/tb_account');
+const { tbl_user } = require('../models');
+// const NavigationAssignments = require('../models/tb_navigation_assignment');
 const jwt = require('jsonwebtoken');
 const { hashPassword, compareSyncPassword } = require('../utils/password.util');
 const { jwtKey } = require('../config/config');
@@ -6,10 +7,10 @@ const { jwtKey } = require('../config/config');
 module.exports = {
   signup: async (req, res) => {
     try {
-      const { username, name, email, password } = req.body;
+      const { username, name, email, password, roleId } = req.body;
 
-      const checkEmail = await Accounts.findOne({ where: { email: email } });
-      const checkUsername = await Accounts.findOne({
+      const checkEmail = await tbl_user.findOne({ where: { email: email } });
+      const checkUsername = await tbl_user.findOne({
         where: { username: username },
       });
 
@@ -28,10 +29,11 @@ module.exports = {
       if (!checkEmail && !checkUsername) {
         const hashedPassword = await hashPassword(password);
 
-        const newUser = await Accounts.create({
+        const newUser = await tbl_user.create({
           username,
           name,
           email,
+          roleId,
           password: hashedPassword,
         });
         await newUser.save();
@@ -54,7 +56,7 @@ module.exports = {
     try {
       const { email, password } = req.body;
 
-      await Accounts.findOne({ where: { email: email } }).then((user) => {
+      await tbl_user.findOne({ where: { email: email } }).then((user) => {
         if (user) {
           const checkPassword = compareSyncPassword(password, user.password);
           if (checkPassword) {
@@ -63,13 +65,10 @@ module.exports = {
                 account: {
                   id: user.id,
                   username: user.username,
+                  roleId: user.roleId,
                   name: user.name,
                   email: user.email,
-                  no_identitas: user.no_identitas,
-                  unit: user.unit,
-                  role: user.role,
-                  kontak: user.kontak,
-                  img_profil: user.img_profil,
+                  avatar: user.avatar,
                 },
               },
               jwtKey,
@@ -98,4 +97,27 @@ module.exports = {
       });
     }
   },
+  checkAccess: async (req, res) => {
+    const { url } = req.body;
+    var id_role = req.user.dataValues.id_role;
+
+    var count = await NavigationAssignments.count({
+      where: {
+        url: url,
+        id_role: id_role
+      }
+    });
+
+    if (count < 0) {
+      res.status(403).json({
+        error: true,
+        message: 'User does not have access'
+      })
+    } else {
+      res.status(200).json({
+        error: false,
+        message: 'User allowed'
+      })
+    }
+  }
 };

@@ -1,5 +1,5 @@
-const Opinis = require('../models/tb_opini');
-const Account = require('../models/tb_account');
+// const Opinis = require('../models/tb_opini');
+// const Account = require('../models/tb_account');
 const deleteFile = require('../utils/deleteFIle.util');
 
 module.exports = {

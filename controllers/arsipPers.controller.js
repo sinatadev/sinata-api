@@ -1,7 +1,7 @@
-const ArsipPers = require('../models/tb_arsip_pers');
-const Peliputans = require('../models/tb_laypeliputan');
-const DataKegiatans = require('../models/tb_kegiatan');
-const Accounts = require('../models/tb_account');
+// const ArsipPers = require('../models/tb_arsip_pers');
+// const Peliputans = require('../models/tb_laypeliputan');
+// const DataKegiatans = require('../models/tb_kegiatan');
+// const Accounts = require('../models/tb_account');
 
 module.exports = {
 	viewArsipPers: async (req, res) => {

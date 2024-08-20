@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { jwtKey } = require('../config/config');
-const Accounts = require('../models/tb_account');
+const { tbl_user } = require('../models');
 module.exports = {
 	isLogin: async (req, res, next) => {
 		try {
@@ -15,7 +15,7 @@ module.exports = {
 
 			const data = jwt.verify(token, jwtKey);
 
-			const user = await Accounts.findOne({ where: { id: data.account.id } });
+			const user = await tbl_user.findOne({ where: { id: data.account.id } });
 			req.user = user;
 			req.token = token;
 			next();

@@ -1,4 +1,4 @@
-const Accounts = require('../models/tb_account');
+const { tbl_user } = require('../models');
 const deleteFile = require('../utils/deleteFIle.util');
 const { hashPassword, compareSyncPassword } = require('../utils/password.util');
 const { Op } = require('sequelize');
@@ -14,10 +14,10 @@ module.exports = {
 			if (role) {
 				where = { role };
 			}
-			const totalRow = await Accounts.count();
+			const totalRow = await tbl_user.count();
 			const totalPage = Math.ceil(totalRow / limit);
 
-			const users = await Accounts.findAll({
+			const users = await tbl_user.findAll({
 				offset: offset,
 				limit: limit,
 				where,

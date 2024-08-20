@@ -1,8 +1,50 @@
-const Accounts = require('../models/tb_account');
-const Kegiatans = require('../models/tb_kegiatan');
+// const Accounts = require('../models/tb_account');
+// const Kegiatans = require('../models/tb_kegiatan');
 const deleteFile = require('../utils/deleteFIle.util');
 
 module.exports = {
+  loadDataKegiatan: async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const offset = (page - 1) * limit;
+    try {
+      const totalRow = await Kegiatans.count();
+      const totalPage = Math.ceil(totalRow / limit);
+
+      // cek apakah role user
+      var idRoleUser = req.user.dataValues.id_role;
+      var dataKegiatan;
+      if (idRoleUser == 1) {
+        dataKegiatan = await Kegiatans.findAll({
+          where: {
+            id_account: req.user.dataValues.id,
+          },
+          limit,
+          offset,
+          order: [['createdAt', 'DESC']],
+        })
+      } else {
+        dataKegiatan = await Kegiatans.findAll({
+          limit,
+          offset,
+          order: [['createdAt', 'DESC']],
+        })
+      }
+
+      res.status(200).json({
+        message: `Berhasil menampilkan ${dataKegiatan.length} data kegiatan tersimpan.`,
+        page: page,
+        totalPage,
+        totalRow,
+        rowsPerPage: limit,
+        data: dataKegiatan,
+      });
+    } catch (e) {
+      res.status(500).json({
+        message: e.message || 'Internal Server Error',
+      });
+    }
+  },
   viewDataKegiatan: async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 5;

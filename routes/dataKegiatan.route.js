@@ -7,9 +7,12 @@ const {
 	addDataKegiatan,
 	editDataKegiatan,
 	deleteDataKegiatan,
-	viewDataKegiatanUser,
+	viewDataKegiatanUser, loadDataKegiatan,
 } = require('../controllers/dataKegiatan.controller');
 const upload = require('../utils/upload.util');
+
+// loaddata
+router.get('/loaddata', isLogin, loadDataKegiatan)
 
 // admins
 router.get('/lihat', isLogin, viewDataKegiatan);

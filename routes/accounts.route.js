@@ -13,10 +13,10 @@ const {
 const { isLoginAdmin, isLogin } = require('../middlewares/auth.middleware');
 const upload = require('../utils/upload.util');
 
-router.get('/lihat', isLoginAdmin, viewUsers);
-router.post('/tambah', isLoginAdmin, addUsers);
-router.put('/:id/edit', isLoginAdmin, editUser);
-router.delete('/:id/delete', isLoginAdmin, deleteUser);
+router.get('/lihat', isLogin, viewUsers);
+router.post('/tambah', isLogin, addUsers);
+router.put('/:id/edit', isLogin, editUser);
+router.delete('/:id/delete', isLogin, deleteUser);
 router.put(
 	'/:id/change-avatar',
 	isLogin,

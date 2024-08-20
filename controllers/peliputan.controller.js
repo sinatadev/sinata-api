@@ -1,6 +1,6 @@
-const Peliputans = require('../models/tb_laypeliputan');
-const DataKegiatans = require('../models/tb_kegiatan');
-const Accounts = require('../models/tb_account');
+// const Peliputans = require('../models/tb_laypeliputan');
+// const DataKegiatans = require('../models/tb_kegiatan');
+// const Accounts = require('../models/tb_account');
 const deleteFile = require('../utils/deleteFIle.util');
 const { Op } = require('sequelize');
 
