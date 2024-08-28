@@ -1,8 +1,9 @@
-const { tbl_user } = require('../models');
-// const NavigationAssignments = require('../models/tb_navigation_assignment');
+const { tbl_user } = require('../models')
 const jwt = require('jsonwebtoken');
 const { hashPassword, compareSyncPassword } = require('../utils/password.util');
 const { jwtKey } = require('../config/config');
+const {Sequelize, QueryTypes} = require("sequelize");
+const sequelize = require("../config/connection");
 
 module.exports = {
   signup: async (req, res) => {
@@ -72,7 +73,7 @@ module.exports = {
                 },
               },
               jwtKey,
-              { expiresIn: '24h' },
+              { expiresIn: '3h' },
             );
 
             res.status(200).json({
@@ -98,25 +99,38 @@ module.exports = {
     }
   },
   checkAccess: async (req, res) => {
-    const { url } = req.body;
-    var id_role = req.user.dataValues.id_role;
+    try {
+      const { url } = req.body;
+      var roleId = req.user.dataValues.roleId;
 
-    var count = await NavigationAssignments.count({
-      where: {
-        url: url,
-        id_role: id_role
+      var count = await sequelize.query(
+          `
+            SELECT COUNT(*) 
+            FROM tbl_navigation_assignments na 
+            LEFT JOIN tbl_navigations n ON na."navigationId" = n.Id 
+            WHERE n."route" = :url AND na."roleId" = :roleId
+          `,
+          {
+            replacements: { url, roleId },
+            type: QueryTypes.SELECT,
+          },
+      )
+
+      if (count[0].count < 1) {
+        res.status(403).json({
+          error: true,
+          message: 'User does not have access'
+        })
+      } else {
+        res.status(200).json({
+          error: false,
+          message: 'User allowed'
+        })
       }
-    });
-
-    if (count < 0) {
-      res.status(403).json({
-        error: true,
-        message: 'User does not have access'
-      })
-    } else {
-      res.status(200).json({
-        error: false,
-        message: 'User allowed'
+    } catch (e) {
+      res.status(500).json({
+        message: 'Internal Server Error',
+        error: e.message
       })
     }
   }
