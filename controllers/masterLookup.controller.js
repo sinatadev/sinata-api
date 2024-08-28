@@ -1,27 +1,29 @@
-const { tbl_role } = require("../models");
+const { tbl_lookup } = require('../models')
+
 module.exports = {
     loadData: async (req, res) => {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 5;
-        const offset = (page - 1) * limit;
         try {
-            const totalRow = await tbl_role.count();
+            const page = parseInt(req.query.page) || 1;
+            const limit = parseInt(req.query.limit) || 5;
+            const offset = (page - 1) * limit;
+
+            const totalRow = await tbl_lookup.count()
             const totalPage = Math.ceil(totalRow / limit);
 
-            const roles = await tbl_role.findAll({
-                offset: offset,
+            const lookups = await tbl_lookup.findAll({
+                offset,
                 limit,
                 order: [[ 'createdAt', 'DESC' ]],
             })
 
             res.status(200).json({
                 success: true,
-                message: `Berhasil menampilkan ${roles.length} data roles`,
+                message: `Berhasil menampilkan ${lookups.length} data lookup`,
                 page,
                 totalPage,
                 totalRow,
                 rowsPerPage: limit,
-                data: roles
+                data: lookups
             })
         } catch (e) {
             res.status(500).json({
@@ -30,23 +32,25 @@ module.exports = {
             })
         }
     },
-    create: async (req, res) => {
+    createLookup: async (req, res) => {
         try {
-            const { name, description, isActive } = req.body;
-            let userId = req.user.id;
+            const { type, name, value, description, isActive } = req.body;
+            const userId = req.user.id;
 
-            var newRole = await tbl_role.create({
+            var newLookup = await tbl_lookup.create({
+                type,
                 name,
+                value,
                 description,
                 isActive,
                 createdBy: userId
             })
 
-            await newRole.save();
+            await newLookup.save();
 
             res.status(200).json({
                 success: true,
-                message: 'Berhasil menambahkan role baru'
+                message: 'Berhasil menambahkan lookup baru'
             })
         } catch (e) {
             res.status(500).json({
@@ -55,22 +59,24 @@ module.exports = {
             })
         }
     },
-    edit: async (req, res) => {
+    editLookup: async (req, res) => {
         try {
-            const { id, name, description, isActive } = req.body;
-            let userId = req.user.id;
+            const { id, type, name, value, description, isActive } = req.body;
+            const userId = req.user.id
 
-            const role = await tbl_role.findByPk(id)
-            if (!role) {
-                res.status(404).json({
+            const lookup = await tbl_lookup.findByPk(id)
+            if (!lookup) {
+                return res.status(404).json({
                     success: false,
-                    message: 'Role tidak ditemukan.'
+                    message: 'Lookup tidak ditemukan'
                 })
-                return
+
             }
 
-            await role.update({
+            await lookup.update({
+                type,
                 name,
+                value,
                 description,
                 isActive,
                 updatedBy: userId
@@ -78,7 +84,7 @@ module.exports = {
 
             res.status(200).json({
                 success: true,
-                message: 'Berhasil mengubah role'
+                message: 'Berhasil mengubah data lookup'
             })
         } catch (e) {
             res.status(500).json({
@@ -87,25 +93,23 @@ module.exports = {
             })
         }
     },
-    deleteRole: async (req, res) => {
+    deleteLookup: async (req, res) => {
         try {
             const { id } = req.body;
 
-            const role = await tbl_role.findByPk(id);
-            if (!role) {
-                res.status(404).json({
+            const lookup = await tbl_lookup.findByPk(id)
+            if (!lookup) {
+                return res.status(404).json({
                     success: false,
-                    message: 'Role tidak ditemukan.'
+                    message: 'Data Lookup tidak ditemukan'
                 })
-                return
             }
 
-            // delete
-            await role.destroy()
+            await lookup.destroy()
 
             res.status(200).json({
                 success: true,
-                message: 'Berhasil menghapus role'
+                message: 'Berhasil menghapus data lookup'
             })
         } catch (e) {
             res.status(500).json({
