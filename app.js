@@ -5,6 +5,7 @@ var sequelize = require('./config/connection');
 var cors = require('cors');
 
 const authRouter = require('./routes/auth.route');
+const masterRole = require('./routes/masterRole.route');
 const accountsRouter = require('./routes/accounts.route');
 const dataKegiatanRouter = require('./routes/dataKegiatan.route');
 const publikasiAgendaRouter = require('./routes/publikasiAgenda.route');
@@ -42,6 +43,7 @@ app.get('/', async (req, res) => {
 });
 app.use('/uploads', express.static('uploads'));
 app.use(`${URL}/auth`, authRouter);
+app.use(`${URL}/master-role`, masterRole);
 app.use(`${URL}/users`, accountsRouter);
 app.use(`${URL}/data-kegiatan`, dataKegiatanRouter);
 app.use(`${URL}/publikasi-agenda`, publikasiAgendaRouter);
