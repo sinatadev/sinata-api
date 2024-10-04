@@ -181,6 +181,7 @@ module.exports = {
 			if (
 				user.role === 'Super Admin' ||
 				user.role === 'Admin Role 3' ||
+				user.role === 'Admin Role 5' ||
 				user.role === 'Admin Role 9'
 			) {
 				req.user = user;
